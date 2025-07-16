@@ -42,14 +42,14 @@ const About = () => {
     <section id="about" className="py-20 bg-gray-800">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-4">
             <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
             <p className="text-xl text-gray-300">
               Blending visual creativity with practical development
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className="grid lg:grid-cols-2 gap-12 items-center ">
             <div>
               <h3 className="text-2xl font-semibold text-white mb-6">My Journey</h3>
               <p className="text-gray-300 mb-4 leading-relaxed">
@@ -82,32 +82,14 @@ const About = () => {
                 ))}
               </div>
             </div>
-            
-            <div className="bg-gradient-to-br from-gray-700 to-gray-900 rounded-2xl p-8 border border-gray-600">
-              <div className="grid grid-cols-2 gap-6 text-center mb-8">
-                <div>
-                  <div className="text-3xl font-bold text-blue-400 mb-2">50+</div>
-                  <div className="text-gray-300 text-sm">Creative Projects</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-purple-400 mb-2">5+</div>
-                  <div className="text-gray-300 text-sm">Years Experience</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-green-400 mb-2">25+</div>
-                  <div className="text-gray-300 text-sm">Happy Clients</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-orange-400 mb-2">10+</div>
-                  <div className="text-gray-300 text-sm">Skill Areas</div>
-                </div>
-              </div>
-              
-              <div className="text-center">
-                <p className="text-gray-300 text-sm italic">
-                  "Well-positioned for roles that demand both creative vision and technical implementation"
-                </p>
-              </div>
+            <div className="relative flex flex-col items-center justify-center">
+              {/* Purple glow circle behind everything */}
+             
+              <img
+                src="/assets/smileb.svg"
+                alt="profile"
+                className="h-[600px] w-auto object-contain"
+              />
             </div>
           </div>
 

@@ -98,31 +98,22 @@ const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Header */}
-      <div className="bg-gradient-to-r from-gray-800 to-gray-900 border-b border-gray-700">
-        <div className="container mx-auto px-6 py-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <button
+      
+        <div className="flex items-center justify-between mx-auto px-6 pt-6 pb-4">
+          <button
                 onClick={() => onNavigate?.('home')}
                 className="flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 mb-4"
               >
                 <ArrowLeft size={20} className="mr-2" />
                 Back to Home
-              </button>
-              <h1 className="text-4xl font-bold text-white mb-2">My Projects</h1>
-              <p className="text-gray-300">A complete showcase of creative projects and technical achievements</p>
-            </div>
-            <div className="hidden md:block">
-              <div className="bg-gray-700 rounded-lg p-4 border border-gray-600">
+          </button>
+          <h1 className="text-4xl font-bold text-white mb-2">My Projects</h1>
+              <div className="">
                 <div className="text-2xl font-bold text-blue-400">{filteredProjects.length}</div>
                 <div className="text-gray-300 text-sm">Projects</div>
               </div>
-            </div>
-          </div>
         </div>
-      </div>
-
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-6 pb-12">
         {/* Filter Tabs */}
         <div className="mb-12">
           <div className="flex items-center mb-6">
@@ -258,11 +249,11 @@ const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({ onNavigate }) => {
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-gray-800 to-gray-700 rounded-2xl p-8 border border-gray-600">
+          <div className="">
             <h3 className="text-2xl font-bold text-white mb-4">Like what you see?</h3>
             <p className="text-gray-300 mb-6">Let's discuss how I can bring your creative vision to life</p>
             <button
-              onClick={() => onNavigate?.('home')}
+              onClick={() => onNavigate?.('contact')}
               className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
             >
               Get In Touch

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Github, Linkedin, Instagram, Send, MessageCircle } from 'lucide-react';
+import { Mail, MapPin,Youtube, Github, Linkedin, Instagram, Send, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -59,6 +59,11 @@ const Contact = () => {
       icon: <Instagram className="w-6 h-6" />,
       label: "Instagram",
       url: "https://www.instagram.com/wailchairimahjor/"
+    },
+    {
+      icon: <Youtube className="w-6 h-6" />,
+      label: "Youtube",
+      url: "https://www.youtube.com/@wailchairi6196"
     }
   ];
 
