@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Github, Play, Eye, ArrowRight } from 'lucide-react';
+import { Play, Eye, ArrowRight } from 'lucide-react';
 
 interface ProjectsProps {
   onNavigate?: (page: string) => void;
@@ -86,7 +86,7 @@ const Projects: React.FC<ProjectsProps> = ({ onNavigate, preview = false }) => {
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-white mb-4">Featured Projects</h2>
               <p className="text-xl text-gray-300">
-                A glimpse into my creative and technical work
+                A glimpse into my Work
               </p>
             </div>
 

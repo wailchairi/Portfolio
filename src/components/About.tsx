@@ -45,23 +45,26 @@ const About = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
             <p className="text-xl text-gray-300">
-              Creative vision meets technical expertise
+              Blending visual creativity with practical development
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
-              <h3 className="text-2xl font-semibold text-white mb-6">My Story</h3>
+              <h3 className="text-2xl font-semibold text-white mb-6">My Journey</h3>
               <p className="text-gray-300 mb-4 leading-relaxed">
-                I'm Wail Chairi Mahjor, a multidisciplinary creative with a strong foundation in visual 
-                storytelling and digital design. With years of hands-on experience in video editing, 
-                motion graphics, and brand design, I've crafted compelling content for agencies, 
-                political campaigns, and freelance clients.
+                 I'm Wail Chairi Mahjor — a self-taught designer, video editor, 
+                 and junior developer. I started out in digital art and motion graphics,
+                 creating content for clients ranging from small businesses to political campaigns. 
+                 Over time, I expanded into video editing, brand identity, and visual storytelling using
+                 tools like After Effects, Photoshop, and Premiere Pro.
               </p>
+              
               <p className="text-gray-300 mb-6 leading-relaxed">
-                Blending my artistic background with technical curiosity, I've recently expanded into 
-                frontend and backend development, completing advanced training in React.js and gaining 
-                practical experience with Laravel and Node.js through real-world projects.
+                My creative path naturally led me to the world of web development,
+                where I now work with technologies like React, Laravel, 
+                and Node.js. I'm currently building real-world projects and refining my skills 
+                through self-driven learning and internships.
               </p>
               
               <div className="space-y-4">

@@ -58,7 +58,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => 
             onClick={() => handleNavigation('home')}
             className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-purple-300 transition-all duration-200"
           >
-            Wail Chairi
+            <img src="/assets/logo.svg" alt="Logo" className="h-9 w-auto inline-block mr-2" />
           </button>
           
           {/* Desktop Navigation */}
