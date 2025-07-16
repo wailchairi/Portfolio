@@ -2,47 +2,79 @@ import React from 'react';
 import { Calendar, MapPin, Briefcase } from 'lucide-react';
 
 const Experience = () => {
-  const experiences = [
-    {
-      title: "Creative Developer",
-      company: "Freelance",
-      location: "Remote",
-      period: "2023 - Present",
-      type: "Current",
-      description: "Combining creative design with web development skills to create unique digital experiences. Working on React.js projects while maintaining a strong portfolio of motion graphics and visual design work.",
-      achievements: [
-        "Developed modern web applications using React.js and Node.js",
-        "Created motion graphics and visual content for diverse clients",
-        "Bridged the gap between design and development in project workflows"
-      ]
-    },
-    {
-      title: "Motion Graphics Designer",
-      company: "Various Agencies",
-      location: "Morocco",
-      period: "2020 - 2023",
-      type: "Creative",
-      description: "Specialized in creating compelling motion graphics, visual effects, and brand content for agencies and political campaigns. Developed expertise in video editing and digital storytelling.",
-      achievements: [
-        "Produced 100+ motion graphics pieces for political campaigns",
-        "Designed complete brand identities and visual systems",
-        "Collaborated with agencies on high-profile creative projects"
-      ]
-    },
-    {
-      title: "Visual Designer & Video Editor",
-      company: "Creative Studios",
-      location: "Morocco",
-      period: "2018 - 2020",
-      type: "Design",
-      description: "Focused on video editing, digital art creation, and photo manipulation. Built foundational skills in visual storytelling and developed proficiency in industry-standard creative software.",
-      achievements: [
-        "Edited and produced promotional videos and content",
-        "Created digital art and photo manipulations for various projects",
-        "Developed expertise in Adobe Creative Suite and design workflows"
-      ]
-    }
-  ];
+const experiences = [
+  {
+    title: "Frontend Intern – Developer",
+    company: "Flex Business",
+    location: "Morocco",
+    period: "May 2025 – Present",
+    type: "Current",
+    description:
+      "Contributing to a delivery management platform using React and Tailwind. Collaborating with the dev team on components, dashboards, and API integration.",
+    achievements: [
+      "Built reusable components and dashboards with React.js",
+      "Worked with real backend APIs and authentication flows",
+      "Practiced Git, collaboration workflows, and code reviews",
+    ],
+  },
+  {
+    title: "Video Editor & Motion Designer",
+    company: "Highkey Agency",
+    location: "Remote",
+    period: "July 2023 – April 2024",
+    type: "Creative",
+    description:
+      "Created short-form video content for social platforms. Focused on fast-paced editing and storytelling.",
+    achievements: [
+      "Produced 100+ short videos optimized for engagement",
+      "Handled all editing, sound design, and animation independently",
+      "Adapted visual content for multiple brands and audiences",
+    ],
+  },
+  {
+    title: "Freelance Designer & Editor",
+    company: "Independent Clients",
+    location: "Remote",
+    period: "2020 – 2023",
+    type: "Creative",
+    description:
+      "Provided design and editing services to local businesses and individuals. Specialized in logos, flyers, posters, and video edits.",
+    achievements: [
+      "Delivered consistent branding materials and promo videos",
+      "Worked directly with clients from concept to final delivery",
+      "Used Adobe Creative Suite for most projects",
+    ],
+  },
+  {
+    title: "Graphic Designer & Print Operator",
+    company: "Local Print Shop",
+    location: "Morocco",
+    period: "2021 – 2023",
+    type: "Design",
+    description:
+      "Handled both digital design and physical print production of materials including business cards, posters, books, and menus.",
+    achievements: [
+      "Designed and prepared hundreds of print-ready files",
+      "Worked daily with clients under short deadlines",
+      "Built solid layout and typography habits",
+    ],
+  },
+  {
+    title: "Campaign Content Creator",
+    company: "RNI – Tangier",
+    location: "Morocco",
+    period: "September 2021",
+    type: "Creative",
+    description:
+      "Worked on political content during the election campaign. Focused on photography, visual identity, and poster creation.",
+    achievements: [
+      "Photographed campaign events and edited materials on the spot",
+      "Designed printed media under tight political deadlines",
+      "Collaborated with communication teams on branding",
+    ],
+  },
+];
+
 
   const getTypeColor = (type: string) => {
     switch (type) {
@@ -60,7 +92,7 @@ const Experience = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">Professional Journey</h2>
             <p className="text-xl text-gray-300">
-              My evolution from creative designer to multidisciplinary developer
+              trying to fit my skills into real-world projects
             </p>
           </div>
 

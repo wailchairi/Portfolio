@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Instagram, Send, MessageCircle } from 'lucide-react';
+import { Mail, MapPin, Github, Linkedin, Instagram, Send, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -27,20 +27,20 @@ const Contact = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       label: "Email",
-      value: "wail.chairi@email.com",
-      link: "mailto:wail.chairi@email.com"
+      value: "chairiwail@gmail.com",
+      link: "mailto:chairiwail@gmail.com"
     },
     {
       icon: <MessageCircle className="w-6 h-6" />,
       label: "WhatsApp",
-      value: "+212 XXX XXX XXX",
-      link: "https://wa.me/212XXXXXXXXX"
+      value: "+212 658 018 597",
+      link: "https://wa.me/212658018597"
     },
     {
       icon: <MapPin className="w-6 h-6" />,
       label: "Location",
-      value: "Morocco",
-      link: "#"
+      value: "tangier , Morocco",
+      link: "https://www.google.com/maps/place/tangier+morocco/data=!4m2!3m1!1s0xd0b875cf04c132d:0x76bfc571bfb4e17a?sa=X&ved=1t:155783&ictx=111"
     }
   ];
 
@@ -48,17 +48,17 @@ const Contact = () => {
     {
       icon: <Github className="w-6 h-6" />,
       label: "GitHub",
-      url: "https://github.com"
+      url: "https://github.com/wailchairi"
     },
     {
       icon: <Linkedin className="w-6 h-6" />,
       label: "LinkedIn",
-      url: "https://linkedin.com"
+      url: "https://www.linkedin.com/in/wail-chairi-mahjor-88865b344/"
     },
     {
       icon: <Instagram className="w-6 h-6" />,
       label: "Instagram",
-      url: "https://instagram.com"
+      url: "https://www.instagram.com/wailchairimahjor/"
     }
   ];
 
@@ -83,6 +83,8 @@ const Contact = () => {
                   <a
                     key={index}
                     href={info.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-200 group border border-gray-600"
                   >
                     <div className="text-blue-400 mr-4 group-hover:text-blue-300">
@@ -103,6 +105,8 @@ const Contact = () => {
                     <a
                       key={index}
                       href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="p-3 bg-gray-700 rounded-full hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 transition-all duration-200 group border border-gray-600"
                       title={social.label}
                     >
