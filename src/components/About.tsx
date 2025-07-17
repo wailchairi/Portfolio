@@ -42,7 +42,7 @@ const About = () => {
     <section id="about" className="py-20 bg-gray-800">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-4">
+          <div className="text-center ">
             <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
             <p className="text-xl text-gray-300">
               Blending visual creativity with practical development
