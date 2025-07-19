@@ -90,15 +90,15 @@ const Projects: React.FC = () => {
                 <button
                   key={cat.id}
                   onClick={() => navigate(`/showcase/${cat.id}`)}
-                  className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 group flex flex-col items-stretch shadow-lg cursor-pointer focus:outline-none"
+                  className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-700 transition-all duration-300 group flex flex-col items-stretch shadow-lg cursor-pointer focus:outline-none"
                   aria-label={`View ${cat.label} projects`}
                 >
-                  <div className="relative h-56 w-full flex items-center justify-center bg-black gap-1">
+                  <div className="relative h-56 w-full flex items-center justify-center bg-black gap-1 overflow-hidden">
                     {cat.videos.slice(0, 3).map((video, i) => (
                       <video
                         key={i}
                         src={video}
-                        className="object-cover rounded-lg border-2 border-gray-800 group-hover:border-blue-400 transition-all duration-300"
+                        className="object-cover rounded-lg border-2 border-gray-800 transition-all duration-300 group-hover:scale-105 group-hover:brightness-75"
                         style={{ width: `calc(100%/${count})`, height: '100%' }}
                         poster="/assets/logo.svg"
                         muted
@@ -107,12 +107,18 @@ const Projects: React.FC = () => {
                         playsInline
                       />
                     ))}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    {/* Blue arrow overlay on hover */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                      <svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-blue-500 drop-shadow-lg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                    {/* Dark overlay on hover */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300" />
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
                     <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{cat.label}</h3>
                     <p className="text-gray-300 mb-4 flex-1">{cat.description}</p>
-                    <span className="text-blue-400 font-semibold mt-auto">View Projects &rarr;</span>
                   </div>
                 </button>
               );
@@ -141,16 +147,16 @@ const Projects: React.FC = () => {
                 <button
                   key={cat.id}
                   onClick={() => navigate(`/showcase/${cat.id}`)}
-                  className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 group flex flex-col items-stretch shadow-lg cursor-pointer focus:outline-none"
+                  className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-700 transition-all duration-300 group flex flex-col items-stretch shadow-lg cursor-pointer focus:outline-none"
                   aria-label={`View ${cat.label} projects`}
                 >
-                  <div className="relative h-56 w-full flex items-center justify-center bg-black gap-1">
+                  <div className="relative h-56 w-full flex items-center justify-center bg-black gap-1 overflow-hidden">
                     {thumbs.map((thumb, i) => (
                       thumb.type === 'video' ? (
                         <video
                           key={i}
                           src={thumb.src}
-                          className="object-cover rounded-lg border-2 border-gray-800 group-hover:border-blue-400 transition-all duration-300"
+                          className="object-cover rounded-lg border-2 border-gray-800 transition-all duration-300 group-hover:scale-105 group-hover:brightness-75"
                           style={{ width: `calc(100%/${count})`, height: '100%' }}
                           poster="/assets/logo.svg"
                           muted
@@ -162,18 +168,24 @@ const Projects: React.FC = () => {
                         <img
                           key={i}
                           src={thumb.src}
-                          className="object-cover rounded-lg border-2 border-gray-800 group-hover:border-blue-400 transition-all duration-300"
+                          className="object-cover rounded-lg border-2 border-gray-800 transition-all duration-300 group-hover:scale-105 group-hover:brightness-75"
                           style={{ width: `calc(100%/${count})`, height: '100%' }}
                           alt={cat.label + ' thumbnail'}
+                          onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/assets/logo.svg'; }}
                         />
                       )
                     ))}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    {/* Add the blue arrow and dark overlay for images as well */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                      <svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-blue-500 drop-shadow-lg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300" />
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
                     <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{cat.label}</h3>
                     <p className="text-gray-300 mb-4 flex-1">{cat.description}</p>
-                    <span className="text-blue-400 font-semibold mt-auto">View Projects &rarr;</span>
                   </div>
                 </button>
               );

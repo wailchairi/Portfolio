@@ -1,11 +1,7 @@
 import React from 'react';
 import { ArrowDown, Eye, Mail } from 'lucide-react';
 
-interface HeroProps {
-  onNavigate?: (page: string) => void;
-}
-
-const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
+const Hero: React.FC = () => {
   const scrollToNext = () => {
     const element = document.getElementById('about');
     if (element) {
@@ -14,8 +10,9 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   };
 
   const handleViewWork = () => {
-    if (onNavigate) {
-      onNavigate('projects');
+    const element = document.getElementById('projects');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

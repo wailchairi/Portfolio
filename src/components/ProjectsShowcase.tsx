@@ -201,6 +201,9 @@ const categoryLabels: Record<string, string> = {
   'motion-graphics': 'Motion Graphics',
   'video-editing': 'Video Editing',
   'visual-effects': 'Visual Effects',
+  'photomanipulation': 'Photo Manipulation',
+  'graphic-design': 'Graphic Design',
+  'art': 'Art',
 };
 
 const ProjectsShowcase: React.FC = () => {
@@ -229,14 +232,15 @@ const ProjectsShowcase: React.FC = () => {
             <button
               key={proj.id}
               onClick={() => navigate(`/project/${proj.id}`)}
-              className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 group flex flex-col items-stretch shadow-lg cursor-pointer focus:outline-none"
+              className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 transition-all duration-300 group flex flex-col items-stretch shadow-lg cursor-pointer focus:outline-none"
               aria-label={`View project: ${proj.label}`}
             >
-              <div className="relative h-56 w-full flex items-center justify-center bg-black">
+              <div className="relative h-56 w-full flex items-center justify-center bg-black overflow-hidden">
+                {/* Video or image thumbnail */}
                 {'videos' in proj && proj.videos && proj.videos.length > 0 ? (
                   <video
                     src={proj.videos[0]}
-                    className="object-cover h-full w-full rounded-lg border-2 border-gray-800 group-hover:border-blue-400 transition-all duration-300"
+                    className="object-cover h-full w-full rounded-lg border-2 border-gray-800 transition-all duration-300 group-hover:scale-105 group-hover:brightness-75"
                     poster="/assets/logo.svg"
                     muted
                     autoPlay
@@ -246,16 +250,23 @@ const ProjectsShowcase: React.FC = () => {
                 ) : ('thumbnail' in proj && proj.thumbnail ? (
                   <img
                     src={proj.thumbnail}
-                    className="object-cover h-full w-full rounded-lg border-2 border-gray-800 group-hover:border-blue-400 transition-all duration-300"
+                    className="object-cover h-full w-full rounded-lg border-2 border-gray-800 transition-all duration-300 group-hover:scale-105 group-hover:brightness-75"
                     alt={proj.label + ' thumbnail'}
+                    onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/assets/logo.svg'; }}
                   />
                 ) : null)}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                {/* Blue arrow overlay on hover */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-blue-500 drop-shadow-lg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                {/* Dark overlay on hover */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300" />
               </div>
               <div className="p-6 flex-1 flex flex-col">
                 <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{proj.label}</h3>
                 <p className="text-gray-300 mb-4 flex-1">{proj.description}</p>
-                <span className="text-blue-400 font-semibold mt-auto">View Project &rarr;</span>
               </div>
             </button>
           ))}

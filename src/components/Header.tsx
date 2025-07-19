@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 interface HeaderProps {
-  currentPage?: string;
   onNavigate?: (page: string) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => {
+const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -33,20 +32,20 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => 
     setIsMenuOpen(false);
   };
 
-  const navItems = currentPage === 'home' 
-    ? [
-        { label: 'About', action: () => handleNavigation('home', 'about') },
-        { label: 'Projects', action: () => handleNavigation('projects') },
-        { label: 'Experience', action: () => handleNavigation('home', 'experience') },
-        { label: 'Contact', action: () => handleNavigation('home', 'contact') }
-      ]
-    : [
-        { label: 'Home', action: () => handleNavigation('home') },
-        { label: 'About', action: () => handleNavigation('home', 'about') },
-        { label: 'Projects', action: () => handleNavigation('projects') },
-        { label: 'Experience', action: () => handleNavigation('home', 'experience') },
-        { label: 'Contact', action: () => handleNavigation('home', 'contact') }
-      ];
+  const navItems = [
+    { label: 'About', action: () => handleNavigation('home', 'about') },
+    { label: 'Projects', action: () => {
+      setIsMenuOpen(false);
+      setTimeout(() => {
+        const element = document.getElementById('projects');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } },
+    { label: 'Experience', action: () => handleNavigation('home', 'experience') },
+    { label: 'Contact', action: () => handleNavigation('home', 'contact') }
+  ];
 
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${

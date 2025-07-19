@@ -483,6 +483,7 @@ const ProjectDetail: React.FC = () => {
                   src={gallery[galleryIdx].src}
                   alt={gallery[galleryIdx].title}
                   className="w-full h-[60vh] object-contain rounded-xl shadow-lg bg-black"
+                  onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/assets/logo.svg'; }}
                 />
               )}
               {isPhotoProject && gallery.length > 0 && gallery[galleryIdx].type === 'video' && (
@@ -573,6 +574,7 @@ const ProjectDetail: React.FC = () => {
                       alt={item.title}
                       className={`h-12 w-12 md:h-20 md:w-20 object-cover rounded-lg border-2 ${galleryIdx === idx ? 'border-blue-500' : 'border-gray-700'} cursor-pointer`}
                       onClick={() => setGalleryIdx(idx)}
+                      onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/assets/logo.svg'; }}
                     />
                   ) : (
                     <video
