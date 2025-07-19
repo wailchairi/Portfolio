@@ -7,8 +7,8 @@ const videoCategories = [
     label: 'Motion Graphics',
     description: 'Animated graphics, explainer videos, and creative motion design.',
     videos: [
-      '/assets/work/motion graphics/the Story of Mate Rimac/leaving the company.mp4',
-      '/assets/work/motion graphics/Tipping is a scam/unethical practice.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/the+Story+of+Mate+Rimac/leaving+the+company.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/Tipping+is+a+scam/unethical+practice.mp4',
     ],
   },
   {
@@ -16,9 +16,9 @@ const videoCategories = [
     label: 'Video Editing',
     description: 'Short films, edits, creative reels, and shorts.',
     videos: [
-      '/assets/work/video editing/personal reels/taloussis.mp4',
-      '/assets/work/video editing/shorts/9.mp4',
-      '/assets/work/video editing/Talent - الموهبة/The main Montage.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/video+editing/personal+reels/taloussis.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/video+editing/shorts/9.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/Talent+-+%D8%A7%D9%84%D9%85%D9%88%D9%87%D8%A8%D8%A9/The+main+Montage.mp4',
     ],
   },
   {
@@ -26,8 +26,8 @@ const videoCategories = [
     label: 'Visual Effects',
     description: 'Compositing, VFX, and digital effects for film and animation.',
     videos: [
-      '/assets/work/Visual Effects/Animated Drawing/move soul.mp4',
-      '/assets/work/Visual Effects/Attack on Titan/beast.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/Visual+Effects/Animated+Drawing/move+soul.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/Visual+Effects/Attack+on+Titan/beast.mp4',
     ],
   },
 ];
@@ -38,11 +38,11 @@ const photoCategories = [
     label: 'Photomanipulation',
     description: 'Creative photo manipulation and compositing.',
     images: [
-      '/assets/work/photomanipulation/Tangier Apocalypse/zombie.jpg',
-      '/assets/work/photomanipulation/Realistic Conan/conan.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/Tangier+Apocalypse/zombie.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/Realistic+Conan/conan.jpg',
     ],
     videos:[
-      '/assets/work/photomanipulation/the land/land.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/the+land/land.mp4',
     ]
   },
   {
@@ -50,9 +50,9 @@ const photoCategories = [
     label: 'Graphic Design',
     description: 'Posters, branding, and graphic design work.',
     images: [
-      '/assets/work/graphic design/Poster Design/بلحة.jpg',
-      '/assets/work/graphic design/Tshits/good friends.png',
-      '/assets/work/graphic design/Invitation/daawa.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/%D8%A8%D9%84%D8%AD%D8%A9.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Tshits/good+friends.png',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/Invitation/daawa.jpg',
     ],
   },
   {
@@ -60,9 +60,9 @@ const photoCategories = [
     label: 'Art',
     description: 'Digital and hand-drawn art.',
     images: [
-      '/assets/work/Art/Digital Art/death.jpg',
-      '/assets/work/Art/Digital Art/old.jpg',
-      '/assets/work/Art/HAnd drawn art/20190519_132505 copy.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/Art/Digital+Art/death.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/Art/Digital+Art/old.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/HAnd+drawn+art/20190519_132505+copy.jpg',
     ],
   },
 ];
