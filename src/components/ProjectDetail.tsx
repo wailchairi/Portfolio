@@ -143,7 +143,7 @@ export const projectMap: Record<string, {
   },
   'the-land': {
     category: 'Photomanipulation',
-    label: 'Horizons of Imagination',
+    label: 'Transforming my self into a diffrent envirment',
     description: 'A surreal photomanipulation compositing a self-portrait from my rooftop into a breathtaking fantasy landscape, showcasing both creative vision and technical execution in digital artistry.',
     technologies: ['Photoshop'],
     info: '2022 | Personal Project | Role: Digital Artist & Photocomposition Specialist',
@@ -335,7 +335,7 @@ const projectGallery: Record<string, { type: 'image' | 'video'; src: string; tit
   ],
   'turning-myself-into-fictional-character': [
     { type: 'image', src: 'https://drive.google.com/file/d/11ObZJesM3ja6TgjtzCZ1v-ZDNedF36te/preview', title: 'Me as Thors' },
-    { type: 'video', src: 'https://drive.google.com/file/d/1YE9-69TwoJYdrvuIG8HYeJXiaYKAHG9D/preview', title: 'The full process' },
+    { type: 'video', src: 'https://drive.google.com/file/d/1lJ7QndG8xmTjm5SVpttOqKukNnUqNTKP/preview', title: 'The full process' },
   ],
   'the-land': [
     { type: 'image', src: 'https://drive.google.com/file/d/1sU53W2qv75b-b3SCBEnDt3a0sFEJZM4p/preview', title: 'The Farmer' },

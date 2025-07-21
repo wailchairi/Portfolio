@@ -186,7 +186,7 @@ const showcaseData = {
     },
     {
       id: 'hand-drawn-art',
-      label: 'Hand Drawn Art',
+      label: 'Traditional Art',
       description: 'Personal explorations in traditional hand-drawn art.',
       type: 'photo',
       thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Art/HAnd+drawn+art/Cat.jpg',
