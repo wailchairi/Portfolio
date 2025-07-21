@@ -127,7 +127,7 @@ export const projectMap: Record<string, {
   },
   'rissala': {
     category: 'Photomanipulation',
-    label: 'Rissala: The Messenger',
+    label: 'Rissala Ship',
     description: 'A conceptual photomanipulation bringing the Rissala organization\'s logo to life, depicting their mission through a symbolic ship delivering messages of hope. The artwork visualizes children surviving childhood as messengers carrying society-changing ideas across turbulent waters.',
     technologies: ['Photoshop'],
     info: '2016 | Professional Project | Role: Concept Artist & Photomanipulation Specialist',
@@ -165,7 +165,7 @@ export const projectMap: Record<string, {
     info: '2018-Present | Professional Projects | Role: Graphic Designer',
     type: 'photo',
   },
-  'T-Shirt': {
+  'T-Shirts': {
     category: 'Graphic Design',
     label: 'T-Shirt Design ',
     description: 'A complete line of original T-shirt designs created for a startup clothing brand, focusing on marketable designs that align with the client\'s brand identity and target audience.',
@@ -218,16 +218,16 @@ const projectVideos: Record<string, { src: string; title: string }[]> = {
   ],
   'tipping-is-a-scam': [
     { src: 'https://drive.google.com/file/d/1sJC56E1aEuJZdK26kAM6wvaBwe_ohC6N/preview', title: 'Big Mistake' },
-    { src: 'https://drive.google.com/file/d/1ogpN_bKZXoqGMO7aFdhRAJmj9LDgT2LO/preview', title: 'Unethical+Practice' },
     { src: 'https://drive.google.com/file/d/1AZfEnW2vpYbNv01qfpqxBSe_LJfcuSAs/preview', title: 'Explaining' },
+    { src: 'https://drive.google.com/file/d/1ogpN_bKZXoqGMO7aFdhRAJmj9LDgT2LO/preview', title: 'Unethical+Practice' },
   ],
   'personal-reels': [
     { src: 'https://drive.google.com/file/d/1tKgQ6bHiED-q7uPH_YGDr0M5onDgNxzd/preview', title: 'Taloussis' },
     { src: 'https://drive.google.com/file/d/12_RQFWhCOE6KvTn3VJHCSi97JSX0gWCu/preview', title: 'كلتي' },
-    { src: 'https://drive.google.com/file/d/1MP3TNveFuv35XmtuC1EJubM_WfSVRy_F/preview', title: 'Into+the+Wild' },
-    { src: 'https://drive.google.com/file/d/1XmHkEJgC4nK_zSBorVWrEKqKP8OcUXoT/preview', title: 'حافة+زلطان' },
-    { src: 'https://drive.google.com/file/d/1lcPjcGmdj1SocNDxl3tUQn8la1WG0xJC/preview', title: 'The+Sunset' },
-    { src: 'https://drive.google.com/file/d/1HapqeteD1iUGszymuukJD9dC3oEgFzap/preview', title: 'الصابة المنقولة' },
+    { src: 'https://drive.google.com/file/d/1MP3TNveFuv35XmtuC1EJubM_WfSVRy_F/preview', title: 'Into the Wild' },
+    { src: 'https://drive.google.com/file/d/1XmHkEJgC4nK_zSBorVWrEKqKP8OcUXoT/preview', title: 'حافة زلطان' },
+    { src: 'https://drive.google.com/file/d/1lcPjcGmdj1SocNDxl3tUQn8la1WG0xJC/preview', title: 'The Sunset' },
+    { src: 'https://drive.google.com/file/d/10zuJLm88pwKd2n5XI6HnmxguQ7ckv5QM/preview', title: 'Fahss Lemhar' },
   ],
   'talent': [
       { src: 'https://drive.google.com/file/d/1a_2JxVKeUlbM28u0Y046m75cqVa_XqxM/preview', title: 'Intro' },
@@ -267,7 +267,7 @@ const projectGallery: Record<string, { type: 'image' | 'video'; src: string; tit
     { type: 'image', src: 'https://drive.google.com/file/d/1xHtZWX4ErlXjCGYJ5c29C9zcKcX_bcg_/preview', title: 'كيف تكتب أول رواية لك' },
     { type: 'image', src: 'https://drive.google.com/file/d/1IzIJjtlim22FEJZex6i8AVya1sFU0SzW/preview', title: 'مركز خطوة' },
   ],
-  'T-shirts': [
+  'T-Shirts': [
     { type: 'image', src: 'https://drive.google.com/file/d/13w-7Y--BTbBOqbSEiDe301q-Pzp4o5fK/preview', title: 'good friends' },
     { type: 'image', src: 'https://drive.google.com/file/d/17RJRdxNjMKa6ljFk19HvcqJLCNOZKMHF/preview', title: 'pink baseball' },
     { type: 'image', src: 'https://drive.google.com/file/d/1_9G4Je-IC5IOxo3EN7CYFJg_n0605ewx/preview', title: 'women' },
@@ -369,42 +369,16 @@ const ProjectDetail: React.FC = () => {
   const [galleryIdx, setGalleryIdx] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [poster, setPoster] = useState<string | undefined>(undefined);
   const location = useLocation();
   const category = location.state?.category;
 
   useEffect(() => {
     setIsPlaying(true);
-    setPoster(undefined);
   }, [galleryIdx, projectId]);
 
   useEffect(() => {
     if ((isPhotoProject && gallery.length > 0) || (isVideoProject && videos.length > 0)) setGalleryIdx(0);
   }, [projectId, isPhotoProject, isVideoProject]);
-
-  // Extract the first frame as poster for videos
-  useEffect(() => {
-    if (isVideoProject && videos[galleryIdx]) {
-      const video = videoRef.current;
-      if (!video) return;
-      const handleLoaded = () => {
-        try {
-          const canvas = document.createElement('canvas');
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
-          const ctx = canvas.getContext('2d');
-          if (ctx) {
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            setPoster(canvas.toDataURL('image/jpeg'));
-          }
-        } catch {
-          setPoster(undefined);
-        }
-      };
-      video.addEventListener('loadeddata', handleLoaded, { once: true });
-      return () => video.removeEventListener('loadeddata', handleLoaded);
-    }
-  }, [galleryIdx, projectId, isVideoProject, videos]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -483,6 +457,8 @@ const ProjectDetail: React.FC = () => {
                     src={videos[galleryIdx].src}
                     className="w-full h-[70vh] border-none"
                     allow="autoplay"
+                    allowFullScreen
+                    title={videos[galleryIdx].title}
                   />
                 ) 
               )}

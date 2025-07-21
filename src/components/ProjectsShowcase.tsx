@@ -155,7 +155,7 @@ const showcaseData = {
       thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/hadkourt+copy.jpg',
     },
     {
-      id: 'tshits',
+      id: 'T-Shirts',
       label: 'T-shirts',
       description: 'Original T-shirt designs for a startup clothing brand.',
       type: 'photo',
