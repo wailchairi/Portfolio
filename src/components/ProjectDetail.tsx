@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 import { SiAdobeaftereffects, SiAdobephotoshop, SiAdobepremierepro, SiCinema4D } from 'react-icons/si';
 
 // Map projectId to folder and info
-const projectMap: Record<string, {
-  folder: string;
+export const projectMap: Record<string, {
   category: string;
   label: string;
   description: string;
@@ -14,7 +13,6 @@ const projectMap: Record<string, {
   type?: 'photo' | 'video'; // Added type for photo projects
 }> = {
   'the-story-of-mate-rimac': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/the+Story+of+Mate+Rimac',
     category: 'Motion Graphics',
     label: 'The Story of Mate Rimac',
     description: 'A documentary-style YouTube project about Mate Rimac, featuring advanced motion graphics and video editing. Note: Script and voiceover by the client (Alex).',
@@ -23,7 +21,6 @@ const projectMap: Record<string, {
     type: 'video',
   },
   'tipping-is-a-scam': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Tipping is a scam',
     category: 'Motion Graphics',
     label: 'Tipping is a Scam',
     description: 'A documentary-style YouTube project analyzing tipping culture, using motion graphics to visually explain the concept. Note: Script and voiceover by client (Alex).',
@@ -32,7 +29,6 @@ const projectMap: Record<string, {
     type: 'video',
   },
   'personal-reels': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/personal reels',
     category: 'Video Editing',
     label: 'Personal Reels',
     description: 'A collection of my best personal adventure edits, focusing on cinematic storytelling through sequencing and subtle details. These reel prioritize authentic mountain hiking experiences over trendy hooks, using purely visual narration (no voiceover).',
@@ -41,8 +37,6 @@ const projectMap: Record<string, {
     type: 'video',
   },
   'talent': {
-    
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Talent - الموهبة',
     category: 'Video Editing',
     label: 'Talent - الموهبة',
     description: 'A documentary-style edit featuring creative cuts and visual storytelling. Collaborated with Ayoub Essafi on script development, while handling video editing, smart transitions, and cinematography. The concept plays with youthful themes while showcasing professional editing techniques.',
@@ -51,7 +45,6 @@ const projectMap: Record<string, {
     type: 'video',
   },
   'shorts': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/shorts',
     category: 'Video Editing',
     label: 'Shorts',
     description: 'A curated selection of short-form content created for HighKey Agency clients during my 10-month tenure. Edited 100+ reels (a limited selection shown here), featuring compelling storytelling for high-profile speakers.',
@@ -60,16 +53,14 @@ const projectMap: Record<string, {
     type: 'video',
   },
   'animated-drawing': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Animated Drawing',
     category: 'Visual Effects',
     label: 'Animated Drawing',
-    description: 'A VFX exploration blending hand-drawn animation with realistic compositing techniques. Features original artwork brought to life through frame-by-frame animation and advanced digital integration.',
+    description: 'A VFX exploration blending hand-drawn animation with realistic compositing techniques. Features original artwork brought to life through visual effects animation and advanced digital integration.',
     technologies: ['After Effects', 'Photoshop'],
     info: '2024 | Personal Project | Duration: 10 sec | Role: Animation & VFX Compositing',
     type: 'video',
   },
   'attack-on-titan': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Attack on Titan',
     category: 'Visual Effects',
     label: 'Turning my self into the Beast titan',
     description: 'An ambitious VFX project transforming myself into an Attack on Titan character through digital compositing and animation. Developed over several months, this involved mastering new techniques to achieve authentic anime-style effects.',
@@ -79,7 +70,6 @@ const projectMap: Record<string, {
   },
   // Added photo projects
   'realistic-conan': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Realistic Conan',
     category: 'Photomanipulation',
     label: 'Realistic Conan',
     description: 'A decade-old photomanipulation project reimagining the Conan anime character with hyper-realistic details, showcasing early mastery of digital artistry.',
@@ -88,7 +78,6 @@ const projectMap: Record<string, {
     type: 'photo',
   },
   'turning-salah-into-zombie': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Turning Salah into Zombie',
     category: 'Photomanipulation',
     label: 'Zombie Transformation',
     description: 'A photorealistic zombie makeover project featuring a full character transformation of my friend Salah, created through advanced digital manipulation techniques.',
@@ -97,7 +86,6 @@ const projectMap: Record<string, {
     type: 'photo',
   },
   'tod-realistic': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Tod realistic',
     category: 'Photomanipulation',
     label: 'Realistic Todd Chavez',
     description: 'A photorealistic character redesign transforming the BoJack Horseman animated character into a lifelike human version, while preserving the original voice actors likeness.',
@@ -106,7 +94,6 @@ const projectMap: Record<string, {
     type: 'photo',
   },
   'samurai-jack-realistic': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Samurai jack realistic',
     category: 'Photomanipulation',
     label: 'Realistic Samurai Jack',
     description: 'A hyper-realistic character reimagining of the iconic Samurai Jack, blending anime aesthetics with photorealistic digital painting techniques.',
@@ -115,120 +102,107 @@ const projectMap: Record<string, {
     type: 'photo',
   },
   'turning-bilal-into-eren': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Turning Bilal into Eren',
     category: 'Photomanipulation',
     label: 'Turning Bilal into Eren',
-    description: 'A photomanipulation project transforming a person into Eren Yeager.',
+    description: 'A photomanipulation project transforming a portrait of Bilal into Eren Yeager from Attack on Titan, capturing the character’s iconic look and intensity.',
     technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Photomanipulation',
+    info: '2022 | Personal Project | Role: Photomanipulation Artist',
     type: 'photo',
   },
   'aji': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Aji',
     category: 'Photomanipulation',
-    label: 'Aji',
-    description: 'A photomanipulation project featuring an Aji character.',
+    label: 'Aji Club Poster',
+    description: 'A cinematic-style recruitment poster using photomanipulation, designed to announce Aji Club s new member intake with dramatic, movie-like visuals.',
     technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Photomanipulation',
+    info: '2023 | Professional Project | Role: Photomanipulation Artist',
     type: 'photo',
   },
   'van-gogh': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Van gogh',
     category: 'Photomanipulation',
-    label: 'Van Gogh',
-    description: 'A photomanipulation project recreating a Van Gogh painting.',
+    label: 'Van Gogh Reimagined',
+    description: 'A creative photomanipulation blending my facial features into Van Gogh\'s iconic painting style, transforming the artwork to convey a unique personal narrative and artistic vision.',
     technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Photomanipulation',
+    info: '2022 | Personal Project | Role: Digital Artist & Photomanipulation Specialist',
     type: 'photo',
   },
   'rissala': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Rissala',
     category: 'Photomanipulation',
-    label: 'Rissala',
-    description: 'A photomanipulation project featuring a Rissala character.',
+    label: 'Rissala: The Messenger',
+    description: 'A conceptual photomanipulation bringing the Rissala organization\'s logo to life, depicting their mission through a symbolic ship delivering messages of hope. The artwork visualizes children surviving childhood as messengers carrying society-changing ideas across turbulent waters.',
     technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Photomanipulation',
+    info: '2016 | Professional Project | Role: Concept Artist & Photomanipulation Specialist',
     type: 'photo',
   },
   'turning-myself-into-fictional-character': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Turning my self into fictional carachter',
     category: 'Photomanipulation',
     label: 'Turning Myself into Fictional Character',
-    description: 'A photomanipulation project transforming a person into a fictional character.',
+    description: 'A photomanipulation project transforming my portrait into Thors, the legendary warrior from Vinland Saga, while preserving the anime\'s distinct art style and the character\'s noble demeanor.',
     technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Photomanipulation',
+    info: '2021 | Personal Project | Role: Digital Artist & Photomanipulation Specialist',
     type: 'photo',
   },
   'the-land': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/the land',
     category: 'Photomanipulation',
-    label: 'The Land',
-    description: 'A photomanipulation project depicting a landscape.',
+    label: 'Horizons of Imagination',
+    description: 'A surreal photomanipulation compositing a self-portrait from my rooftop into a breathtaking fantasy landscape, showcasing both creative vision and technical execution in digital artistry.',
     technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Photomanipulation',
+    info: '2022 | Personal Project | Role: Digital Artist & Photocomposition Specialist',
     type: 'photo',
   },
   'tangier-apocalypse': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Tangier Apocalypse',
     category: 'Photomanipulation',
     label: 'Tangier Apocalypse',
-    description: 'A photomanipulation project depicting an apocalyptic scene in Tangier.',
+    description: 'An ambitious photomanipulation transforming a famous Tangier landmark into a post-apocalyptic wasteland, featuring myself as a survivor. This complex project required complete environmental redesign including: atmospheric lighting reconstruction, architectural modifications, time-of-day transformation, and seamless integration of zombie characters and props while maintaining photorealistic quality.',
     technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Photomanipulation',
+    info: '2020 | Personal Project | Role: Digital Environment Artist & Photocomposition Specialist', 
     type: 'photo',
   },
   'poster-design': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design',
     category: 'Graphic Design',
     label: 'Poster Design',
-    description: 'A graphic design project for a poster.',
-    technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Graphic Design',
+    description: 'A collection of professional poster designs created for diverse clients, delivering visually compelling solutions tailored to each project\'s unique requirements and target audiences.',
+    technologies: ['Photoshop' ,'Illustrator'],
+    info: '2018-Present | Professional Projects | Role: Graphic Designer',
     type: 'photo',
   },
-  'tshits': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Tshits',
+  'T-Shirt': {
     category: 'Graphic Design',
-    label: 'Tshits',
-    description: 'A graphic design project for a Tshits (a type of Arabic bread).',
+    label: 'T-Shirt Design ',
+    description: 'A complete line of original T-shirt designs created for a startup clothing brand, focusing on marketable designs that align with the client\'s brand identity and target audience.',
     technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Graphic Design',
+    info: '2020 | Freelance Project | Role: Apparel Graphic Designer',
     type: 'photo',
   },
   'invitation': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Invitation',
     category: 'Graphic Design',
-    label: 'Invitation',
-    description: 'A graphic design project for an invitation.',
+    label: 'Invitation Design',
+    description: 'An elegant invitation suite designed for Rissala Organization, combining sophisticated typography with meaningful visual elements that reflect the organization\'s mission and values.',
     technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Graphic Design',
+    info: '2022 | Professional PRoject | Role: Graphic Designer',
     type: 'photo',
   },
   'certificate': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Certificate',
     category: 'Graphic Design',
-    label: 'Certificate',
-    description: 'A graphic design project for a certificate.',
-    technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Graphic Design',
+    label: 'Certificate Design',
+    description: 'A collection of custom-designed certificates for various clients, creating elegant and official-looking documents tailored to each organization\'s branding and recognition needs.',
+    technologies: ['Photoshop', 'Illustrator'],
+    info: '2020-Present | Professional PRoject | Role: Graphic Designer',
     type: 'photo',
   },
   'digital-art': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Digital Art',
     category: 'Art',
     label: 'Digital Art',
-    description: 'A digital art project featuring a death scene.',
+    description: 'A curated collection of original digital paintings showcasing technical mastery in photorealistic rendering and advanced compositing techniques, developed through personal artistic exploration.',
     technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Art',
+    info: '2020-Present | Personal Project | Role: Digital Artist',
     type: 'photo',
   },
   'hand-drawn-art': {
-    folder: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/HAnd drawn art',
     category: 'Art',
-    label: 'Hand Drawn Art',
-    description: 'A hand-drawn art project from 2019.',
-    technologies: ['Photoshop'],
-    info: 'Personal Project | Role: Art',
+    label: 'Traditional Art',
+    description: 'A series of hand-drawn artworks created as personal artistic explorations, showcasing foundational drawing skills and creative concepts developed through traditional media.',
+    technologies: [],
+    info: '2019-present | Personal Project | Role: Traditional Artist',
     type: 'photo',
   },
 };
@@ -236,141 +210,142 @@ const projectMap: Record<string, {
 // Hardcoded video files for each project (in real app, automate this)
 const projectVideos: Record<string, { src: string; title: string }[]> = {
   'the-story-of-mate-rimac': [
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/the+Story+of+Mate+Rimac/HAMMOC.mp4', title: 'HAMMOC' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/the+Story+of+Mate+Rimac/leaving+the+company.mp4', title: 'Leaving the Company' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/the+Story+of+Mate+Rimac/Middle+easterns.mp4', title: 'Middle Easterns' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/the+Story+of+Mate+Rimac/rimac+Future.mp4', title: 'Rimac Future' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/the+Story+of+Mate+Rimac/the+concept+one.mp4', title: 'The Concept One' },
+    { src: 'https://drive.google.com/file/d/1HA9b0WrVSliJUqMhGs8juo86NksYetYA/preview', title: 'The Concept One begining' },
+    { src: 'https://drive.google.com/file/d/1g1Wv4H93hARyqfWLxe5I1fL4scMumqgz/preview', title: 'Richard Hammond Accident' },
+    { src: 'https://drive.google.com/file/d/1yBlA0kn-UP5IgAMJPyRVtFL2Siew-Mqs/preview', title: 'Leaving the Company' },
+    { src: 'https://drive.google.com/file/d/1DVlexPpwEJxmZMeKbWoljj8YI6IrkQ4m/preview', title: 'Middle Easterns' },
+    { src: 'https://drive.google.com/file/d/1tiwr9i_wZ6GgIMcBiJzHp5AdhRqsjQuO/preview', title: 'Rimac Future' },
   ],
   'tipping-is-a-scam': [
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Big+mistake.mp4', title: 'Big+Mistake' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/unethical+practice.mp4', title: 'Unethical+Practice' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/explaining.mp4', title: 'Explaining' },
+    { src: 'https://drive.google.com/file/d/1sJC56E1aEuJZdK26kAM6wvaBwe_ohC6N/preview', title: 'Big Mistake' },
+    { src: 'https://drive.google.com/file/d/1ogpN_bKZXoqGMO7aFdhRAJmj9LDgT2LO/preview', title: 'Unethical+Practice' },
+    { src: 'https://drive.google.com/file/d/1AZfEnW2vpYbNv01qfpqxBSe_LJfcuSAs/preview', title: 'Explaining' },
   ],
   'personal-reels': [
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/taloussis.mp4', title: 'Taloussis' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/كلتي.mp4', title: 'كلتي' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/into+the+wild.mp4', title: 'Into+the+Wild' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/حافة+زلطان.mp4', title: 'حافة+زلطان' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/the+sunset.mp4', title: 'The+Sunset' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/الصابة المنقولة.mp4', title: 'الصابة المنقولة' },
+    { src: 'https://drive.google.com/file/d/1tKgQ6bHiED-q7uPH_YGDr0M5onDgNxzd/preview', title: 'Taloussis' },
+    { src: 'https://drive.google.com/file/d/12_RQFWhCOE6KvTn3VJHCSi97JSX0gWCu/preview', title: 'كلتي' },
+    { src: 'https://drive.google.com/file/d/1MP3TNveFuv35XmtuC1EJubM_WfSVRy_F/preview', title: 'Into+the+Wild' },
+    { src: 'https://drive.google.com/file/d/1XmHkEJgC4nK_zSBorVWrEKqKP8OcUXoT/preview', title: 'حافة+زلطان' },
+    { src: 'https://drive.google.com/file/d/1lcPjcGmdj1SocNDxl3tUQn8la1WG0xJC/preview', title: 'The+Sunset' },
+    { src: 'https://drive.google.com/file/d/1HapqeteD1iUGszymuukJD9dC3oEgFzap/preview', title: 'الصابة المنقولة' },
   ],
   'talent': [
-      { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Intro.mp4', title: 'Intro' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/The+main+Montage.mp4', title: 'The+Main+Montage' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/Interview.mp4', title: 'Interview' },
+      { src: 'https://drive.google.com/file/d/1a_2JxVKeUlbM28u0Y046m75cqVa_XqxM/preview', title: 'Intro' },
+      { src: 'https://drive.google.com/file/d/1QK42DufC1865goktfzlEVksnKjg8XG4g/preview', title: 'The Main Montage' },
+      { src: 'https://drive.google.com/file/d/1frYpJ4R9ACq06Mkj3MWUdL0-lb3j8A2H/preview', title: 'Interview' },
   ],
   'shorts': [
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/9.mp4', title: '9' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/4+-+I+ran+into+a+burning+building-.mp4', title: '4+-+I+ran+into+a+burning+building-' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/27-biggest+success+story-.mp4', title: '27-biggest+success+story-' },
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/23-don_t+overthink+your+goals.mp4', title: '23-don_t+overthink+your+goals' },
+    { src: 'https://drive.google.com/file/d/1WNXWeMGQ-KZ95MrKdqifDoK8QRmvGT3L/preview', title: 'Journaling' },
+    { src: 'https://drive.google.com/file/d/1sXTebg3g-CRKlnVob5qpqt7HRIh4OR30/preview', title: 'Tomo - i ran into a burning building' },
+    { src: 'https://drive.google.com/file/d/1b7zAeUFabylrjx1oKaP4eLbWlZrd3k4Q/preview', title: 'biggest success story' },
+    { src: 'https://drive.google.com/file/d/1nCBsRqEXbVqigGmXLLqHkK_QIfVvyvoi/preview', title: 'don_t overthink your goals' },
   ],
   'animated-drawing': [
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/move+soul.mp4', title: 'Move+Soul' },
+    { src: 'https://drive.google.com/file/d/1967iodGhGQQa_6mV1UBHftf1s-D05BHJ/preview', title: 'Whispers Of The Mountain' },
   ],
   'attack-on-titan': [
-    { src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/beast.mp4', title: 'Beast' },
+    { src: 'https://drive.google.com/file/d/1hcw3gZDgTpurpHGzF6HaetXoVlFn9dsc/preview', title: 'Beast' },
   ],
 };
 
 const projectGallery: Record<string, { type: 'image' | 'video'; src: string; title: string }[]> = {
   // Graphic Design
   'poster-design': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/بلحة.jpg', title: 'بلحة' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/pos.jpg', title: 'pos' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/star.jpg', title: 'star' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/الحساب+الذهني+copy.jpg', title: 'الحساب+الذهني' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/bassma+copyq.jpg', title: 'bassma' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/printing.jpg', title: 'printing' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/ilaan+pics.jpg', title: 'ilaan+pics' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/omyaa.jpg', title: 'omyaa' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/music.jpg', title: 'music' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/7afl+copy.jpg', title: '7afl' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/black.jpg', title: 'black' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/IMG-20180603-WA0005.jpg', title: 'IMG-20180603-WA0005' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/stito.jpg', title: 'stitto' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/ilan+copy.jpg', title: 'ilan' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/hadkourt.jpg', title: 'hadkourt' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1woG778fvvj4fgAmyg6lRrwVL1NbtlIi9/preview', title: 'منبع الأمل' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1ozJl9Zf9an51gG1I-PAJX3MxWQ-FsUP_/preview', title: 'مسابقة رمضانية' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1U8xJdRlKqoq2qpl6JnRb4mGhR1mwqjkQ/preview', title: 'رحلة' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1XvRmxgF6W7ZP5CYqKAMUktKzEdM7PwWB/preview', title: 'Store poster' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1D5mMQ98QViW5oFhwaM--35xiMdAZT4RM/preview', title: 'الحساب الذهني' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1-uIuY1Ri7HlyeIE54CPyDRsullqMSf9t/preview', title: 'بصمة' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1yZ1NhtRr5Xe9dt3rwLG9hiEUew_FcuFC/preview', title: 'CGC' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1F5NxplbVM48KIdI2Ynn-muANqxbdfUep/preview', title: 'الحفظ والتجويد' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1M6DhJkuJ-FcOLtaajxFSm7CqDw0dk60C/preview', title: 'محو الأمية' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1VS_1y2RfOwLg7JaIbQ3gPqqQI-ESZiwM/preview', title: 'نادي الموسيقى' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1rUKN5Ss7yHjuYdZmY9tYKSxRcwSrLIww/preview', title: 'الحفل الختامي' },
+    { type: 'image', src: 'https://drive.google.com/file/d/10HpTLDA1fqva1vREHfDzytj50jxjLCAP/preview', title: 'AJI' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1EY6AMuL1xmxKjOzEhfNcpL_pE5EBfp9L/preview', title: 'نادي المسرح' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1xHtZWX4ErlXjCGYJ5c29C9zcKcX_bcg_/preview', title: 'كيف تكتب أول رواية لك' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1IzIJjtlim22FEJZex6i8AVya1sFU0SzW/preview', title: 'مركز خطوة' },
   ],
-  'tshits': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/good+friends.png', title: 'good+friends' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/pink+baseball.png', title: 'pink+baseball' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/women.png', title: 'women' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/baseball+copy.png', title: 'baseball+copy' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/guys.png', title: 'guys' },
+  'T-shirts': [
+    { type: 'image', src: 'https://drive.google.com/file/d/13w-7Y--BTbBOqbSEiDe301q-Pzp4o5fK/preview', title: 'good friends' },
+    { type: 'image', src: 'https://drive.google.com/file/d/17RJRdxNjMKa6ljFk19HvcqJLCNOZKMHF/preview', title: 'pink baseball' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1_9G4Je-IC5IOxo3EN7CYFJg_n0605ewx/preview', title: 'women' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1pd-l8JfdI4CoennI7nfhFim--FSKsCZP/preview', title: 'baseball' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1YCKW3UpZtGE8qTQVDB_PtRYv6gTqxeyU/preview', title: 'guys' },
   ],
   'invitation': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/daawa.jpg', title: 'daawa' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1zLAVZy1MCLeOrjpXwarvcFD4HfOXP0gX/preview', title: 'Invitation' },
   ],
   'certificate': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/ajyal+certificat.jpg', title: 'ajyal+certificat' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/certificat.jpg', title: 'certificat' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/شهادة.jpg', title: 'شهادة' },
+    { type: 'image', src: 'https://drive.google.com/file/d/166d1PY4VCLfOSwWHqbfYZolff0q71m45/preview', title: 'ajyal certificat' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1M6RMSc-QR3V5a9kW55-wbukX0_RF7-Zy/preview', title: 'Rissal certificat' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1fpqjdEb37WkwBwFV5QFBAbLyL0kS8XOB/preview', title: 'Bara2a certificat' },
   ],
   // Art
   'digital-art': [
-    { type: 'video', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/caveman.mp4', title: 'caveman' },
-    { type: 'video', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/wailverine.mp4', title: 'wailverine' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/death.jpg', title: 'death' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/old.jpg', title: 'old' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/cave+tone.jpg', title: 'cave+tone' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/dream.jpg', title: 'dream' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/booy.jpg', title: 'booy' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/subconsious+.jpg', title: 'subconsious' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/spirit+of+the+mountain.jpg', title: 'spirit+of+the+mountain' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/waillverine.jpg', title: 'waillverine' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/me.jpg', title: 'me' },
+    { type: 'video', src: 'https://drive.google.com/file/d/1Idt0gpPewNxvdQ72hPbK74IUgaIzD1w4/preview', title: 'caveman Process' },
+    { type: 'image', src: 'https://drive.google.com/file/d/11QbdNo2M3DKpPcZSLZQMLfvrHA8qwOSk/preview', title: 'cavetone' },
+    { type: 'video', src: 'https://drive.google.com/file/d/1e7GHdIl7AL8tUCUnlTLb-AVSGCSx7PmI/preview', title: 'wailverine' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1KCJ1Ng0b_namINRjGi8TvMGI4M01-L8X/preview', title: 'waillverine' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1cVKt-P5G14g9NH31UxE5TSAfIYZ4KzV3/preview', title: 'death' },
+    { type: 'image', src: 'https://drive.google.com/file/d/14qq_Pc6ECcWuIhukbqWZXNxGwlW4XCd3/preview', title: 'old Man' },
+    { type: 'image', src: 'https://drive.google.com/file/d/11D4hMkVVrEnLuoISldNjWyKJeOzvoA_H/preview', title: 'A land' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1sAQ6fZqQOenEhCrFsR3wSDciUPV5rq45/preview', title: 'Viking' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1Q4qeKgyIB1YZXh5V6pER_Ns5Nhys0xTc/preview', title: 'subconsious' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1Kt_ntkcMcOmrfuSdcp7w0djskqUMhAFV/preview', title: 'Spirit Of The Mountain' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1As4YAaGHssqfFjLyfha-nSS8fITvHMLB/preview', title: 'caricature' },
   ],
   'hand-drawn-art': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/20190519_132505+copy.jpg', title: '20190519_132505' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/DSC05294.JPG', title: 'DSC05294' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/rollo.JPG', title: 'rollo' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/anoir+.jpg', title: 'anoir' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/cave+me.jpg', title: 'cave+me' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1dKclphrz0oqFEh3VAdZxN6Dn2OrWsVQe/preview', title: 'A Cat' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1owjJB9yRzQrAWfU6BiaDMys8DKiEgN37/preview', title: 'A flower' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1UucHutVIg--guV8irRIu-hS_D9edUC-2/preview', title: 'rollo panting' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1rDlKcPyWXA7pdaeJeH4MbAM44RpgULIO/preview', title: 'anoir painting' },
+    { type: 'image', src: 'https://drive.google.com/file/d/11HwBs7iiJ94fMkR9wEfBjKQy3k2JKR1x/preview', title: 'mowgli' },
   ],
   // photomanipulation
   'realistic-conan': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/conan.jpg', title: 'conan' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1GQSzepiJ_p4S8RCJl1TYFEwXlt75n5IT/preview', title: 'Detective Conan Realistic' },
   ],
   'turning-salah-into-zombie': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/soloh.jpg', title: 'soloh' },
-    { type: 'video', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/salah.mp4', title: 'salah' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1cz035rRCY546NoLp1_8pUKTUInTqa4Fj/preview', title: 'Salah as a Zombie' },
+    { type: 'video', src: 'https://drive.google.com/file/d/1H9dLvGhj_0YXZaPeaF6MVZ4fbXjnTphp/preview', title: 'the screen Record of Salah' },
   ],
   'tod-realistic': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/tod.jpg', title: 'tod' },
-    { type: 'video', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/tod.mp4', title: 'tod' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1V3DJ4HBPTcsmIQ1Rrz8I1Y9nGvVRKwNG/preview', title: 'tod' },
+    { type: 'video', src: 'https://drive.google.com/file/d/1LiRG8ccV_OUIKZNPknwKiglyJfRhS1M4/preview', title: 'The full process' },
   ],
   'samurai-jack-realistic': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/samurai+jack+copy.png', title: 'samurai+jack+copy' },
-    { type: 'video', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/samurai+jack.mp4', title: 'samurai+jack' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1A3lfMkLHou94s-GIlck33_28PM_bNZeH/preview', title: 'samurai jack' },
+    { type: 'video', src: 'https://drive.google.com/file/d/1YKHpHHZEepksv8Xa0H99XGyyENEEEny7/preview', title: 'The full process' },
   ],
   'turning-bilal-into-eren': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/irin.jpg', title: 'irin' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1p7pEi50oTvpHr5qtRKusNB-cxJJrJzDF/preview', title: 'Bilal as Eren yeager' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1fYzqtdn7XWYMPaawhIXmk-h13aQz_9bs/preview', title: 'The before image' },
   ],
   'aji': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/aji+recruit.jpg', title: 'aji+recruit' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1H1YlOawzWd6cKHx38gn1qBfoOzIJUVnD/preview', title: 'aji recruit' },
   ],
   'van-gogh': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/mahgokh.jpg', title: 'mahgokh' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1DAw4MlIfu38YdpAcxYBIYKIQ_JE5GB2_/preview', title: 'mah-gogh' },
   ],
   'rissala': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/زورق+الرسالة.jpg', title: 'زورق+الرسالة' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/LOGO.png', title: 'LOGO' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1wej3iEUPYd_Ekt6g0koo4Lp8xnQyZTGP/preview', title: 'The Ship of Rissala' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1_BgmoGeHeMedLngIrxbQuAavvuNtO_zy/preview', title: 'The Logo' },
   ],
   'turning-myself-into-fictional-character': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/thoroso.jpg', title: 'thoroso' },
-    { type: 'video', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/thors.mp4', title: 'thors' },
+    { type: 'image', src: 'https://drive.google.com/file/d/11ObZJesM3ja6TgjtzCZ1v-ZDNedF36te/preview', title: 'Me as Thors' },
+    { type: 'video', src: 'https://drive.google.com/file/d/1YE9-69TwoJYdrvuIG8HYeJXiaYKAHG9D/preview', title: 'The full process' },
   ],
   'the-land': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/flaa7.jpg', title: 'flaa7' },
-    { type: 'video', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/land.mp4', title: 'land' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1sU53W2qv75b-b3SCBEnDt3a0sFEJZM4p/preview', title: 'The Farmer' },
+    { type: 'video', src: 'https://drive.google.com/file/d/1jPj7Sb_4UId6H71Et4xlZPnQtj4I4Nxn/preview', title: 'The full process' },
   ],
   'tangier-apocalypse': [
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/zombie.jpg', title: 'zombie' },
-    { type: 'image', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/walker.jpg', title: 'walker' },
-    { type: 'video', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/apocalypse.mp4', title: 'apocalypse' },
-    { type: 'video', src: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Portfo/walker.mp4', title: 'walker' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1gTc2YsOB-zldnCUNy8N4Y14GjpipS10d/preview', title: 'Tangier Apocalypse' },
+    { type: 'image', src: 'https://drive.google.com/file/d/1fxtvl7hzA94C631mAsO5KQHV_2KhxYEM/preview', title: 'Zoom in' },
+    { type: 'video', src: 'https://drive.google.com/file/d/1ydKBDLdEjCPI22m2TJda8hyil_spu7t5/preview', title: 'the Befor and After' },
+    { type: 'video', src: 'https://drive.google.com/file/d/1WBiiBReFI0put39_WSYjfX72Oswwnyp1/preview', title: 'The full process' },
   ],
 };
 
@@ -394,6 +369,8 @@ const ProjectDetail: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [poster, setPoster] = useState<string | undefined>(undefined);
+  const location = useLocation();
+  const category = location.state?.category;
 
   useEffect(() => {
     setIsPlaying(true);
@@ -451,7 +428,7 @@ const ProjectDetail: React.FC = () => {
     <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-5xl flex items-center">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(category ? `/showcase/${category}` : '/')}
           className="flex items-center text-blue-400 hover:text-blue-300 transition-colors group"
         >
           <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -460,7 +437,7 @@ const ProjectDetail: React.FC = () => {
       </div>
       <div className="max-w-5xl w-full rounded-2xl flex flex-col-reverse md:flex-row overflow-hidden">
         {/* Left: Info */}
-        <div className="flex-1 p-8 flex flex-col justify-center min-w-[280px]">
+        <div className="flex-1 p-4 flex flex-col justify-center min-w-[280px]">
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">{project.label}</h1>
           <h2 className="text-xl text-blue-400 font-semibold mb-2">{project.category}</h2>
           <p className="text-gray-300 mb-6">{project.description}</p>
@@ -476,135 +453,83 @@ const ProjectDetail: React.FC = () => {
         {/* Right: Unified Gallery */}
         <div className="flex-1 p-8 flex flex-col items-center bg-gray-900 min-w-[320px]">
           <div className="w-full flex flex-col items-center">
-            {/* Main media area */}
+            {/* Main media display area */}
             <div className="relative w-full max-w-lg mx-auto mb-2 flex items-center justify-center">
-              {isPhotoProject && gallery.length > 0 && gallery[galleryIdx].type === 'image' && (
-                <img
-                  src={gallery[galleryIdx].src}
-                  alt={gallery[galleryIdx].title}
-                  className="w-full h-[60vh] object-contain rounded-xl shadow-lg bg-black"
-                  onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/assets/logo.svg'; }}
-                />
+              {/* Display either image or video based on project type */}
+              {isPhotoProject && gallery.length > 0 && (
+                gallery[galleryIdx].type === 'image' ? (
+                  <iframe
+                    src={gallery[galleryIdx].src}
+                    className="w-full h-[70vh] object-contain rounded-xl shadow-lg bg-black"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = '/assets/logo.svg';
+                    }}
+                  />
+                ) : (
+                  <iframe
+                    src={gallery[galleryIdx].src}
+                    className="w-full h-[70vh] object-contain rounded-xl shadow-lg bg-black"
+                    allow="autoplay"
+                    onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/assets/logo.svg'; }}
+                  />
+                )
               )}
-              {isPhotoProject && gallery.length > 0 && gallery[galleryIdx].type === 'video' && (
-                <video
-                  ref={videoRef}
-                  src={gallery[galleryIdx].src}
-                  className="w-full h-[60vh] object-contain rounded-xl shadow-lg bg-black"
-                  controls
-                  autoPlay
-                  loop
-                  playsInline
-                  poster={poster || '/assets/logo.svg'}
-                  onClick={() => setIsPlaying((p) => !p)}
-                  style={{ cursor: 'pointer' }}
-                />
-              )}
+
               {isVideoProject && videos.length > 0 && (
-                <video
-                  ref={videoRef}
-                  src={videos[galleryIdx].src}
-                  className="w-full h-[60vh] object-contain rounded-xl shadow-lg bg-black"
-                  controls
-                  autoPlay
-                  loop
-                  playsInline
-                  poster={poster || '/assets/logo.svg'}
-                  onClick={() => setIsPlaying((p) => !p)}
-                  style={{ cursor: 'pointer' }}
-                />
+                (
+                  <iframe
+                    src={videos[galleryIdx].src}
+                    className="w-full h-[70vh] border-none"
+                    allow="autoplay"
+                  />
+                ) 
               )}
-              {/* Arrows */}
-              {(isPhotoProject && gallery.length > 1) && (
+
+              {/* Navigation arrows - works for both photo and video projects */}
+              {(gallery.length > 1 || videos.length > 1) && (
                 <>
                   <button
-                    onClick={() => setGalleryIdx((galleryIdx - 1 + gallery.length) % gallery.length)}
+                    onClick={() => setGalleryIdx((prev) => 
+                      (prev - 1 + (gallery.length || videos.length)) % (gallery.length || videos.length)
+                    )}
                     className="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-800 text-white rounded-full p-2 shadow hover:bg-blue-500 focus:outline-none z-10"
-                    aria-label="Previous item"
                   >
                     <ChevronLeft size={24} />
                   </button>
                   <button
-                    onClick={() => setGalleryIdx((galleryIdx + 1) % gallery.length)}
+                    onClick={() => setGalleryIdx((prev) => 
+                      (prev + 1) % (gallery.length || videos.length)
+                    )}
                     className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-800 text-white rounded-full p-2 shadow hover:bg-blue-500 focus:outline-none z-10"
-                    aria-label="Next item"
-                  >
-                    <ChevronRight size={24} />
-                  </button>
-                </>
-              )}
-              {(isVideoProject && videos.length > 1) && (
-                <>
-                  <button
-                    onClick={() => setGalleryIdx((galleryIdx - 1 + videos.length) % videos.length)}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-800 text-white rounded-full p-2 shadow hover:bg-blue-500 focus:outline-none z-10"
-                    aria-label="Previous video"
-                  >
-                    <ChevronLeft size={24} />
-                  </button>
-                  <button
-                    onClick={() => setGalleryIdx((galleryIdx + 1) % videos.length)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-800 text-white rounded-full p-2 shadow hover:bg-blue-500 focus:outline-none z-10"
-                    aria-label="Next video"
                   >
                     <ChevronRight size={24} />
                   </button>
                 </>
               )}
             </div>
-            {/* Title under main image/video */}
-            {isPhotoProject && gallery.length > 0 && (
-              <div className="w-full text-center text-l font-semibold mb-2">
-                {gallery[galleryIdx].title}
-              </div>
-            )}
-            {isVideoProject && videos.length > 0 && (
-              <div className="w-full text-center text-lg  font-semibold mb-2">
-                {videos[galleryIdx].title}
-              </div>
-            )}
-            {/* Thumbnail strip for all items */}
-            {isPhotoProject && gallery.length > 1 && (
-              <div className="flex gap-2 flex-wrap justify-center mt-2">
-                {gallery.map((item, idx) => (
-                  item.type === 'image' ? (
-                    <img
-                      key={idx}
-                      src={item.src}
-                      alt={item.title}
-                      className={`h-12 w-12 md:h-20 md:w-20 object-cover rounded-lg border-2 ${galleryIdx === idx ? 'border-blue-500' : 'border-gray-700'} cursor-pointer`}
-                      onClick={() => setGalleryIdx(idx)}
-                      onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/assets/logo.svg'; }}
-                    />
-                  ) : (
-                    <video
-                      key={idx}
-                      src={item.src}
-                      className={`h-12 w-12 md:h-20 md:w-20 object-cover rounded-lg border-2 ${galleryIdx === idx ? 'border-blue-500' : 'border-gray-700'} cursor-pointer`}
-                      onClick={() => setGalleryIdx(idx)}
-                      muted
-                      loop
-                      playsInline
-                    />
-                  )
-                ))}
-              </div>
-            )}
-            {isVideoProject && videos.length > 1 && (
-              <div className="flex gap-2 flex-wrap justify-center mt-2">
-                {videos.map((item, idx) => (
-                  <video
-                    key={idx}
-                    src={item.src}
-                    className={`h-12 w-12 md:h-20 md:w-20 object-cover rounded-lg border-2 ${galleryIdx === idx ? 'border-blue-500' : 'border-gray-700'} cursor-pointer`}
-                    onClick={() => setGalleryIdx(idx)}
-                    muted
-                    loop
-                    playsInline
-                  />
-                ))}
-              </div>
-            )}
+
+            {/* Display current item title */}
+            <div className="w-full text-center text-gray-300 mb-2">
+              {isPhotoProject ? gallery[galleryIdx]?.title : videos[galleryIdx]?.title}
+            </div>
+
+
+            {/* Gallery navigation dots */}
+            <div className="flex gap-2 justify-center mt-4">
+              {(isPhotoProject ? gallery : videos).map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setGalleryIdx(idx)}
+                  className={`w-4 h-4 rounded-full border-2 transition-all duration-200 focus:outline-none ${
+                    galleryIdx === idx
+                      ? 'bg-blue-500 border-blue-500 scale-110'
+                      : 'bg-gray-700 border-gray-500 hover:bg-blue-400'
+                  }`}
+                  aria-label={`Go to item ${idx + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -39,7 +39,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gray-800">
+    <section id="about" className="pt-20 pb- bg-gray-800">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center ">
@@ -92,7 +92,7 @@ const About = () => {
               />
             </div>
           </div>
-
+{/*
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {highlights.map((highlight, index) => (
               <div key={index} className="text-center group">
@@ -103,7 +103,7 @@ const About = () => {
                 <p className="text-gray-400 text-sm">{highlight.description}</p>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

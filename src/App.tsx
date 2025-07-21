@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -7,22 +7,27 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Projects from './components/Projects';
 import ProjectsShowcase from './components/ProjectsShowcase';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import ProjectDetail from './components/ProjectDetail';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const location = useLocation();
 
-  const handleNavigation = (page: string) => {
-    setCurrentPage(page);
-  };
+  useEffect(() => {
+    if (location.state?.scrollTo === 'projects') {
+      const el = document.getElementById('projects');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location.state]);
+
+  const handleNavigation = () => {};
 
   return (
     <Routes>
       <Route path="/" element={
         <div className="min-h-screen bg-gray-900">
-          <Header currentPage={currentPage} onNavigate={handleNavigation} />
-          <Hero onNavigate={handleNavigation} />
+          <Header onNavigate={handleNavigation} />
+          <Hero />
           <About />
           <Projects />
           <Experience />

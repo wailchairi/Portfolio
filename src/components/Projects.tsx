@@ -7,8 +7,8 @@ const videoCategories = [
     label: 'Motion Graphics',
     description: 'Animated graphics, explainer videos, and creative motion design.',
     videos: [
-      'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/the+Story+of+Mate+Rimac/leaving+the+company.mp4',
-      'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/Tipping+is+a+scam/unethical+practice.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/the+Story+of+Mate+Rimac/the+concept+one.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/Tipping+is+a+scam/explaining.mp4',
     ],
   },
   {
@@ -18,7 +18,7 @@ const videoCategories = [
     videos: [
       'https://f005.backblazeb2.com/file/my-portfolio-assets/video+editing/personal+reels/taloussis.mp4',
       'https://f005.backblazeb2.com/file/my-portfolio-assets/video+editing/shorts/9.mp4',
-      'https://f005.backblazeb2.com/file/my-portfolio-assets/Talent+-+%D8%A7%D9%84%D9%85%D9%88%D9%87%D8%A8%D8%A9/The+main+Montage.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/video+editing/Talent+-+%D8%A7%D9%84%D9%85%D9%88%D9%87%D8%A8%D8%A9/The+main+Montage.mp4',
     ],
   },
   {
@@ -38,11 +38,11 @@ const photoCategories = [
     label: 'Photomanipulation',
     description: 'Creative photo manipulation and compositing.',
     images: [
-      'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/Tangier+Apocalypse/zombie.jpg',
-      'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/Realistic+Conan/conan.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/zombie.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/conan.jpg',
     ],
     videos:[
-      'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/the+land/land.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/land.mp4',
     ]
   },
   {
@@ -50,9 +50,9 @@ const photoCategories = [
     label: 'Graphic Design',
     description: 'Posters, branding, and graphic design work.',
     images: [
-      'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Poster+Design/%D8%A8%D9%84%D8%AD%D8%A9.jpg',
-      'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/Tshits/good+friends.png',
-      'https://f005.backblazeb2.com/file/my-portfolio-assets/Invitation/daawa.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/hadkourt+copy.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/ajyal+certificat.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/good+friends+.jpg',
     ],
   },
   {
@@ -62,7 +62,7 @@ const photoCategories = [
     images: [
       'https://f005.backblazeb2.com/file/my-portfolio-assets/Art/Digital+Art/death.jpg',
       'https://f005.backblazeb2.com/file/my-portfolio-assets/Art/Digital+Art/old.jpg',
-      'https://f005.backblazeb2.com/file/my-portfolio-assets/HAnd+drawn+art/20190519_132505+copy.jpg',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/Art/HAnd+drawn+art/Cat.jpg',
     ],
   },
 ];
@@ -167,7 +167,15 @@ const Projects: React.FC = () => {
                       ) : (
                         <img
                           key={i}
-                          src={thumb.src}
+                          src={(function() {
+                            if (thumb.src.includes('drive.google.com')) {
+                              const match = thumb.src.match(/\/file\/d\/([\w-]+)\//);
+                              if (match && match[1]) {
+                                return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+                              }
+                            }
+                            return thumb.src;
+                          })()}
                           className="object-cover rounded-lg border-2 border-gray-800 transition-all duration-300 group-hover:scale-105 group-hover:brightness-75"
                           style={{ width: `calc(100%/${count})`, height: '100%' }}
                           alt={cat.label + ' thumbnail'}

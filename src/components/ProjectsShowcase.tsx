@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {  ArrowLeft } from 'lucide-react';
 
@@ -7,21 +7,17 @@ const showcaseData = {
     {
       id: 'the-story-of-mate-rimac',
       label: 'The Story of Mate Rimac',
-      description: 'A documentary-style project about Mate Rimac, featuring advanced motion graphics and storytelling.',
+      description: 'YouTube documentary with advanced motion graphics and editing for Mate Rimac.',
       videos: [
-        'https://f005.backblazeb2.com/file/my-portfolio-assets/work/motion graphics/the Story of Mate Rimac/leaving the company.mp4',
-        'https://f005.backblazeb2.com/file/my-portfolio-assets/work/motion graphics/the Story of Mate Rimac/Middle easterns.mp4',
-        'https://f005.backblazeb2.com/file/my-portfolio-assets/work/motion graphics/the Story of Mate Rimac/rimac Future.mp4',
+        'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/the+Story+of+Mate+Rimac/the+concept+one.mp4',
       ],
     },
     {
       id: 'tipping-is-a-scam',
       label: 'Tipping is a Scam',
-      description: 'A motion graphics project exposing unethical tipping practices.',
+      description: 'Explainer video using motion graphics to analyze tipping culture.',
       videos: [
-        'https://f005.backblazeb2.com/file/my-portfolio-assets/work/motion graphics/Tipping is a scam/unethical practice.mp4',
-        'https://f005.backblazeb2.com/file/my-portfolio-assets/work/motion graphics/Tipping is a scam/explaining.mp4',
-        'https://f005.backblazeb2.com/file/my-portfolio-assets/work/motion graphics/Tipping is a scam/Big mistake.mp4',
+        'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/Tipping+is+a+scam/explaining.mp4',
       ],
     },
   ],
@@ -29,25 +25,25 @@ const showcaseData = {
     {
       id: 'personal-reels',
       label: 'Personal Reels',
-      description: 'A collection of my best video editing work and creative reels.',
+      description: 'Cinematic adventure edits focused on authentic mountain experiences.',
       videos: [
-        'https://f005.backblazeb2.com/file/my-portfolio-assets/work/video editing/personal reels/taloussis.mp4',
+        'https://f005.backblazeb2.com/file/my-portfolio-assets/video+editing/personal+reels/taloussis.mp4',
       ],
     },
     {
       id: 'shorts',
       label: 'Social Media content',
-      description: 'Short-form creative videos and storytelling.',
+      description: 'Short-form reels for agency clients, highlighting storytelling.',
       videos: [
-        'https://f005.backblazeb2.com/file/my-portfolio-assets/work/video editing/shorts/9.mp4',
+        'https://f005.backblazeb2.com/file/my-portfolio-assets/video+editing/shorts/9.mp4',
       ],
     },
     {
       id: 'talent',
       label: 'Talent - الموهبة',
-      description: 'A documentary edit with creative cuts and storytelling.',
+      description: 'Documentary edit with creative cuts and youthful storytelling.',
       videos: [
-        'https://f005.backblazeb2.com/file/my-portfolio-assets/work/video editing/Talent - الموهبة/The main Montage.mp4',
+        'https://f005.backblazeb2.com/file/my-portfolio-assets/video+editing/Talent+-+%D8%A7%D9%84%D9%85%D9%88%D9%87%D8%A8%D8%A9/The+main+Montage.mp4',
       ],
     },
   ],
@@ -55,17 +51,17 @@ const showcaseData = {
     {
       id: 'animated-drawing',
       label: 'Animated Drawing',
-      description: 'A VFX project exploring animated drawing techniques.',
+      description: 'Hand-drawn animation blended with digital VFX.',
       videos: [
-        'https://f005.backblazeb2.com/file/my-portfolio-assets/work/Visual Effects/Animated Drawing/move soul.mp4',
+        'https://f005.backblazeb2.com/file/my-portfolio-assets/Visual+Effects/Animated+Drawing/move+soul.mp4',
       ],
     },
     {
       id: 'attack-on-titan',
       label: 'Attack on Titan',
-      description: 'A VFX project inspired by Attack on Titan.',
+      description: 'Anime-inspired VFX transformation into a Beast Titan.',
       videos: [
-        'https://f005.backblazeb2.com/file/my-portfolio-assets/work/Visual Effects/Attack on Titan/beast.mp4',
+        'https://f005.backblazeb2.com/file/my-portfolio-assets/Visual+Effects/Attack+on+Titan/beast.mp4',
       ],
     },
   ],
@@ -74,125 +70,126 @@ const showcaseData = {
     {
       id: 'tangier-apocalypse',
       label: 'Tangier Apocalypse',
-      description: 'Photo manipulation project: Tangier Apocalypse.',
+      description: 'Photo manipulation turning Tangier into a post-apocalyptic scene.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/photomanipulation/Tangier Apocalypse/zombie.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/zombie.jpg',
     },
     {
       id: 'turning-myself-into-fictional-character',
       label: 'Turning Myself into Fictional Character',
-      description: 'Photo manipulation project: Turning myself into fictional character.',
+      description: 'Portrait transformation into Thors from Vinland Saga.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/photomanipulation/Turning my self into fictional carachter/thoroso.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/thoroso.jpg',
     },
     {
       id: 'the-land',
       label: 'The Land',
-      description: 'Photo manipulation project: The Land.',
-      type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/photomanipulation/the land/flaa7.jpg',
+      description: 'Surreal self-portrait composited into a fantasy landscape.',
+      videos: [
+        'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/land.mp4',
+      ],
     }, 
     {
       id: 'samurai-jack-realistic',
       label: 'Samurai Jack Realistic',
-      description: 'Photo manipulation project: Samurai Jack realistic.',
+      description: 'Anime character reimagined with photorealistic digital painting.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/photomanipulation/Samurai jack realistic/samurai jack copy.png',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/samurai+jack.png',
     },
     {
       id: 'aji',
       label: 'Aji',
-      description: 'Photo manipulation project: Aji.',
+      description: 'Cinematic recruitment poster for Aji Club.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/photomanipulation/Aji/aji recruit.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/aji+recruit.jpg',
     },
     {
       id: 'realistic-conan',
       label: 'Realistic Conan',
-      description: 'Photo manipulation project: Realistic Conan.',
+      description: 'Detective Conan reimagined with hyper-realistic details.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/photomanipulation/Realistic Conan/conan.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/conan.jpg',
     },
     {
       id: 'turning-salah-into-zombie',
       label: 'Turning Salah into Zombie',
-      description: 'Photo manipulation project: Turning Salah into Zombie.',
+      description: 'Photorealistic zombie makeover for a full character transformation.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/photomanipulation/Turning Salah into Zombie/soloh.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/soloh.jpg',
     },
     {
       id: 'tod-realistic',
       label: 'Tod Realistic',
-      description: 'Photo manipulation project: Tod realistic.',
+      description: 'BoJack Horseman’s Todd redesigned as a lifelike human.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/photomanipulation/Tod realistic/tod.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/tod.jpg',
     },
     {
       id: 'turning-bilal-into-eren',
       label: 'Turning Bilal into Eren',
-      description: 'Photo manipulation project: Turning Bilal into Eren.',
+      description: 'Portrait transformed into Eren Yeager from Attack on Titan.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/photomanipulation/Turning Bilal into Eren/irin.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/irin.jpg',
     },
     {
       id: 'van-gogh',
       label: 'Van Gogh',
-      description: 'Photo manipulation project: Van Gogh.',
+      description: 'Blending my features into Van Gogh’s iconic style.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/photomanipulation/Van gogh/mahgokh.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/mahgokh.jpg',
     },
     {
       id: 'rissala',
       label: 'Rissala',
-      description: 'Photo manipulation project: Rissala.',
+      description: 'Conceptual artwork visualizing Rissala’s mission.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/photomanipulation/Rissala/زورق الرسالة.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/photomanipulation/%D8%B2%D9%88%D8%B1%D9%82+%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9.jpg',
     },
   ],
   'graphic-design': [
     {
       id: 'poster-design',
       label: 'Poster Design',
-      description: 'Graphic design project: Poster Design.',
+      description: 'Professional poster designs for diverse clients.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/graphic design/Poster Design/بلحة.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/hadkourt+copy.jpg',
     },
     {
       id: 'tshits',
-      label: 'Tshits',
-      description: 'Graphic design project: Tshits.',
+      label: 'T-shirts',
+      description: 'Original T-shirt designs for a startup clothing brand.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/graphic design/Tshits/good friends.png',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/good+friends+.jpg',
     },
     {
       id: 'invitation',
       label: 'Invitation',
-      description: 'Graphic design project: Invitation.',
+      description: 'Elegant invitation suite for Rissala Organization.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/graphic design/Invitation/daawa.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/daawa.jpg',
     },
     {
       id: 'certificate',
       label: 'Certificate',
-      description: 'Graphic design project: Certificate.',
+      description: 'Custom-designed certificates for various clients.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/graphic design/Certificate/ajyal certificat.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/graphic+design/ajyal+certificat.jpg',
     },
   ],
   'art': [
     {
       id: 'digital-art',
       label: 'Digital Art',
-      description: 'Digital art project.',
+      description: 'Original digital paintings and photorealistic art.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/Art/Digital+Art/death.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Art/Digital+Art/death.jpg',
     },
     {
       id: 'hand-drawn-art',
       label: 'Hand Drawn Art',
-      description: 'Hand drawn art project.',
+      description: 'Personal explorations in traditional hand-drawn art.',
       type: 'photo',
-      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/work/Art/HAnd+drawn+art/20190519_132505 copy.jpg',
+      thumbnail: 'https://f005.backblazeb2.com/file/my-portfolio-assets/Art/HAnd+drawn+art/Cat.jpg',
     },
   ],
 };
@@ -211,11 +208,15 @@ const ProjectsShowcase: React.FC = () => {
   const navigate = useNavigate();
   const projects = showcaseData[category as keyof typeof showcaseData] || [];
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center py-8 px-4 sm:px-6 lg:px-">
       <div className="w-full max-w-5xl mb-8 flex items-center">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/', { state: { scrollTo: 'projects' } })}
           className="flex items-center text-blue-400 hover:text-blue-300 transition-colors group"
         >
           <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -231,7 +232,7 @@ const ProjectsShowcase: React.FC = () => {
           {projects.map((proj) => (
             <button
               key={proj.id}
-              onClick={() => navigate(`/project/${proj.id}`)}
+              onClick={() => navigate(`/project/${proj.id}`, { state: { category } })}
               className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 transition-all duration-300 group flex flex-col items-stretch shadow-lg cursor-pointer focus:outline-none"
               aria-label={`View project: ${proj.label}`}
             >
