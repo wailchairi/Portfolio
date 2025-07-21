@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
-import { SiAdobeaftereffects, SiAdobephotoshop, SiAdobepremierepro, SiCinema4D } from 'react-icons/si';
+import { SiAdobeaftereffects, SiAdobephotoshop, SiAdobepremierepro, SiCinema4D, SiAdobeillustrator } from 'react-icons/si';
 
 // Map projectId to folder and info
 export const projectMap: Record<string, {
@@ -354,6 +354,7 @@ const techIconMap: Record<string, React.ReactNode> = {
   'Premiere Pro': <SiAdobepremierepro className="text-blue-400" title="Premiere Pro" size={28} />,
   'Photoshop': <SiAdobephotoshop className="text-blue-600" title="Photoshop" size={28} />,
   'Cinema 4D': <SiCinema4D className="text-indigo-400" title="Cinema 4D" size={28} />,
+  'Illustrator': <SiAdobeillustrator className="text-orange-500" title="Illustrator" size={28} />,
 };
 
 const ProjectDetail: React.FC = () => {
