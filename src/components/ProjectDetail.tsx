@@ -436,6 +436,7 @@ const ProjectDetail: React.FC = () => {
                   <iframe
                     src={gallery[galleryIdx].src}
                     className="w-full h-[70vh] object-contain rounded-xl shadow-lg bg-black"
+                    allowFullScreen
                     onError={(e) => {
                       e.currentTarget.onerror = null;
                       e.currentTarget.src = '/assets/logo.svg';
