@@ -446,6 +446,7 @@ const ProjectDetail: React.FC = () => {
                     src={gallery[galleryIdx].src}
                     className="w-full h-[70vh] object-contain rounded-xl shadow-lg bg-black"
                     allow="autoplay"
+                    allowFullScreen
                     onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/assets/logo.svg'; }}
                   />
                 )
