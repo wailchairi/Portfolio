@@ -9,6 +9,7 @@ const videoCategories = [
     videos: [
       'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/the+Story+of+Mate+Rimac/the+concept+one.mp4',
       'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/Tipping+is+a+scam/explaining.mp4',
+      'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/the+soul/soul.mp4',
     ],
   },
   {

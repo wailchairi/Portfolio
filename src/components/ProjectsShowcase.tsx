@@ -20,6 +20,14 @@ const showcaseData = {
         'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/Tipping+is+a+scam/explaining.mp4',
       ],
     },
+    {
+      id: 'the-soul',
+      label: 'The soul',
+      description: 'Recreating an old parable using motion graphics to question the meaning.',
+      videos: [
+        'https://f005.backblazeb2.com/file/my-portfolio-assets/motion+graphics/the+soul/soul.mp4',
+      ],
+    },
   ],
   'video-editing': [
     {

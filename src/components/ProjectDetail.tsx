@@ -28,6 +28,14 @@ export const projectMap: Record<string, {
     info: '2022 | Professional Work | Duration: 5 min | Role: Motion Graphics & Editing',
     type: 'video',
   },
+  'the-soul': {
+    category: 'Motion Graphics',
+    label: 'The soul',
+    description: 'Adapted from an old parable Inspired by The Wim Hof Method book. Note: Script is from the book and voiceover is mine.',
+    technologies: ['After Effects', 'Premiere Pro', 'Photoshop'],
+    info: '2025 | Personal Work | Duration: 1 min | Role: Motion Graphics & Editing',
+    type: 'video',
+  },
   'personal-reels': {
     category: 'Video Editing',
     label: 'Personal Reels',
@@ -220,6 +228,9 @@ const projectVideos: Record<string, { src: string; title: string }[]> = {
     { src: 'https://drive.google.com/file/d/1sJC56E1aEuJZdK26kAM6wvaBwe_ohC6N/preview', title: 'Big Mistake' },
     { src: 'https://drive.google.com/file/d/1AZfEnW2vpYbNv01qfpqxBSe_LJfcuSAs/preview', title: 'Explaining' },
     { src: 'https://drive.google.com/file/d/1ogpN_bKZXoqGMO7aFdhRAJmj9LDgT2LO/preview', title: 'Unethical+Practice' },
+  ],
+  'the-soul': [
+    { src: 'https://drive.google.com/file/d/14D4c6r1aI0xe77YC3AUPuajF_tE3NYCM/preview', title: 'The soul' },
   ],
   'personal-reels': [
     { src: 'https://drive.google.com/file/d/1tKgQ6bHiED-q7uPH_YGDr0M5onDgNxzd/preview', title: 'Taloussis' },
