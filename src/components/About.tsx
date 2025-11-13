@@ -1,40 +1,19 @@
 import React from 'react';
-import { Palette, Code, Video, Camera, Zap, Users } from 'lucide-react';
+import { Zap, Users } from 'lucide-react';
 
 const About = () => {
-  const highlights = [
-    {
-      icon: <Palette className="w-8 h-8 text-purple-400" />,
-      title: "Visual Design",
-      description: "Branding, illustration, and motion graphics"
-    },
-    {
-      icon: <Video className="w-8 h-8 text-blue-400" />,
-      title: "Video Production",
-      description: "Video editing, visual effects, and content creation"
-    },
-    {
-      icon: <Code className="w-8 h-8 text-green-400" />,
-      title: "Web Development",
-      description: "React.js, Laravel, and modern web technologies"
-    },
-    {
-      icon: <Camera className="w-8 h-8 text-orange-400" />,
-      title: "Photography",
-      description: "Digital photography and photo manipulation"
-    }
-  ];
+
 
   const qualities = [
     {
       icon: <Zap className="w-6 h-6 text-yellow-400" />,
-      title: "Self-Driven Learning",
-      description: "Continuously expanding skills across creative and technical domains"
+      title: "Self-Taught Discipline",
+      description: "I pick up various tools fast and apply them in projects."
     },
     {
       icon: <Users className="w-6 h-6 text-blue-400" />,
-      title: "Cross-Disciplinary",
-      description: "Bridging aesthetics with function in every project"
+      title: "Practical Creativity",
+      description: "I focus on making ideas real clean, functional, and true to their intent."
     }
   ];
 
@@ -43,9 +22,9 @@ const About = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center ">
-            <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
+            <h2 className="text-4xl font-bold text-white mb-2">About Me</h2>
             <p className="text-xl text-gray-300">
-              Blending visual creativity with practical development
+              Prioritizing truth over shallow aesthetics.
             </p>
           </div>
 
@@ -53,19 +32,14 @@ const About = () => {
             <div>
               <h3 className="text-2xl font-semibold text-white mb-6">My Journey</h3>
               <p className="text-gray-300 mb-4 leading-relaxed">
-                  I'm Wail Chairi Mahjor a self-taught designer, video editor, and junior developer.
-                  I began with hand-drawn art and photography, eventually transitioning into digital design and video editing. 
-                  My journey started with a passion for visual storytelling, 
-                  creating content from personal use to real business needs. 
-                  Over time, I expanded into frontend development, looking to merge creative design with functional code.
-
+                  I'm <span className="font-semibold text-white">Wail Chairi Mahjor</span> a self-taught designer, video editor, and junior developer.
+                  I started with drawing and photography before discovering how much I enjoyed shaping ideas visually. 
+                  That curiosity grew into design, motion, and eventually frontend development.
               </p>
               
               <p className="text-gray-300 mb-6 leading-relaxed">
-                That creative path naturally led me into web development,
-                where I now work with tools like React, Laravel, and Node.js. 
-                I'm currently building real-world projects and sharpening my skills 
-                through self-driven learning and hands-on internships.
+                Along the way, I’ve learned tools like Photoshop, Illustrator, Premiere Pro, After Effects, React, React Native, and Figma — mostly by experimenting and building small projects.
+                I try to keep my work simple, functional, and true to its purpose.
               </p>
               
               <div className="space-y-4">
@@ -76,7 +50,7 @@ const About = () => {
                     </div>
                     <div>
                       <h4 className="text-white font-semibold">{quality.title}</h4>
-                      <p className="text-gray-400 text-sm">{quality.description}</p>
+                      <p className="text-gray-400 text-m">{quality.description}</p>
                     </div>
                   </div>
                 ))}
@@ -92,18 +66,6 @@ const About = () => {
               />
             </div>
           </div>
-{/*
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {highlights.map((highlight, index) => (
-              <div key={index} className="text-center group">
-                <div className="bg-gray-700 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-600 transition-colors duration-300 border border-gray-600">
-                  {highlight.icon}
-                </div>
-                <h4 className="text-xl font-semibold text-white mb-2">{highlight.title}</h4>
-                <p className="text-gray-400 text-sm">{highlight.description}</p>
-              </div>
-            ))}
-          </div> */}
         </div>
       </div>
     </section>

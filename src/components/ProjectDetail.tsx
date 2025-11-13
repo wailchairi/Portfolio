@@ -39,7 +39,7 @@ export const projectMap: Record<string, {
   'personal-reels': {
     category: 'Video Editing',
     label: 'Personal Reels',
-    description: 'A collection of my best personal adventure edits, focusing on cinematic storytelling through sequencing and subtle details. These reel prioritize authentic mountain hiking experiences over trendy hooks, using purely visual narration (no voiceover).',
+    description: 'A collection of my best personal edits, focusing on cinematic storytelling, adventures , or topics i am intrested in, sequencing and subtle details. These reel prioritize authentic experiences over trendy hooks, using purely visual narration.',
     technologies: ['Premiere Pro', 'After Effects'],
     info: 'Personal Work | Duration: ≤1 min each | Role: Editing & Color Grading',
     type: 'video',
@@ -235,10 +235,8 @@ const projectVideos: Record<string, { src: string; title: string }[]> = {
   'personal-reels': [
     { src: 'https://drive.google.com/file/d/1tKgQ6bHiED-q7uPH_YGDr0M5onDgNxzd/preview', title: 'Taloussis' },
     { src: 'https://drive.google.com/file/d/12_RQFWhCOE6KvTn3VJHCSi97JSX0gWCu/preview', title: 'كلتي' },
+    { src: 'https://drive.google.com/file/d/1Iy1ZmL8efrH9bSRc9gBivcIIrDETa8r1/preview', title: 'El Raisuli'},
     { src: 'https://drive.google.com/file/d/1MP3TNveFuv35XmtuC1EJubM_WfSVRy_F/preview', title: 'Into the Wild' },
-    { src: 'https://drive.google.com/file/d/1XmHkEJgC4nK_zSBorVWrEKqKP8OcUXoT/preview', title: 'حافة زلطان' },
-    { src: 'https://drive.google.com/file/d/1lcPjcGmdj1SocNDxl3tUQn8la1WG0xJC/preview', title: 'The Sunset' },
-    { src: 'https://drive.google.com/file/d/10zuJLm88pwKd2n5XI6HnmxguQ7ckv5QM/preview', title: 'Fahss Lemhar' },
   ],
   'talent': [
       { src: 'https://drive.google.com/file/d/1a_2JxVKeUlbM28u0Y046m75cqVa_XqxM/preview', title: 'Intro' },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, Eye, Mail } from 'lucide-react';
+import { ArrowDown, Eye, Mail, Download } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const scrollToNext = () => {
@@ -23,6 +23,15 @@ const Hero: React.FC = () => {
     }
   };
 
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = '/assets/Wail_Chairi_CV.pdf';
+    link.download = 'Wail_Chairi_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
       {/* Animated background elements */}
@@ -35,20 +44,29 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-6 py-20 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8">
-            <img
-              src='/assets/profile.svg'
-              alt='profile'
-              className="mx-auto mb-6 w-40 h-40 rounded-full object-cover shadow-lg"
-            />
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-              Wail <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Chairi</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-6">
-              Creative Designer & Junior Developer
-            </p>
-            <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Crafting digital stories through design, motion, and code. Focused on building bold visuals and functional user experiences.
-            </p>
+              <img
+                src='/assets/profile.svg'
+                alt='profile'
+                className="mx-auto mb-6 w-40 h-40 rounded-full object-cover shadow-lg"
+              />
+              <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
+                Wail <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Chairi</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-300 mb-6">
+                Artist, Designer, Editor & Developer
+              </p>
+              <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-2">
+                  I bring ideas to life through design, motion, and code crafting visuals that not only look good but also feel right.
+              </p>
+              <div className="flex justify-center">
+                <button 
+                  onClick={handleDownloadCV}
+                  className="text-blue-500 hover:text-purple-600 transition-all duration-300 transform text-lg hover:scale-105 flex items-center justify-center gap-2"
+                >
+                  <Download size={20} />
+                  Download CV
+                </button>
+              </div>
             </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -59,6 +77,7 @@ const Hero: React.FC = () => {
               <Eye size={20} />
               View My Work
             </button>
+
             <button 
               onClick={handleContact}
               className="border-2 border-blue-500 text-blue-400 px-8 py-3 rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"

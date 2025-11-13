@@ -32,6 +32,16 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
     setIsMenuOpen(false);
   };
 
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = '/assets/Wail_Chairi_CV.pdf';
+    link.download = 'Wail_Chairi_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setIsMenuOpen(false);
+  };
+
   const navItems = [
     { label: 'About', action: () => handleNavigation('home', 'about') },
     { label: 'Projects', action: () => {
@@ -44,7 +54,8 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
       }, 100);
     } },
     { label: 'Experience', action: () => handleNavigation('home', 'experience') },
-    { label: 'Contact', action: () => handleNavigation('home', 'contact') }
+    { label: 'Contact', action: () => handleNavigation('home', 'contact') },
+    { label: '🡫 CV', action: handleDownloadCV }
   ];
 
   return (

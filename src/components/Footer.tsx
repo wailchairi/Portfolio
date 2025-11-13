@@ -1,5 +1,4 @@
-import React from 'react';
-import { Heart, Code } from 'lucide-react';
+
 
 const Footer = () => {
   return (
@@ -12,11 +11,7 @@ const Footer = () => {
             </p>
           </div>
           <div className="flex items-center text-gray-400">
-            <span>Crafted with</span>
-            <Heart className="w-4 h-4 mx-2 text-red-500" />
-            <span>and</span>
-            <Code className="w-4 h-4 mx-2 text-blue-400" />
-            <span>using React & Tailwind CSS</span>
+             <span>Built with discipline, curiosity, and respect for the craft.</span>
           </div>
         </div>
       </div>

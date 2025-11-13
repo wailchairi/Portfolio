@@ -90,9 +90,9 @@ const experiences = [
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Professional Journey</h2>
+            <h2 className="text-4xl font-bold text-white mb-2">Professional Journey</h2>
             <p className="text-xl text-gray-300">
-              trying to fit my skills into real-world projects
+              trying to fit my skills into Today's world projects
             </p>
           </div>
 
