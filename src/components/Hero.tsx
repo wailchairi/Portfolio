@@ -45,7 +45,7 @@ const Hero: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8">
               <img
-                src='/assets/profile.svg'
+                src='/assets/profile.png'
                 alt='profile'
                 className="mx-auto mb-6 w-40 h-40 rounded-full object-cover shadow-lg"
               />
